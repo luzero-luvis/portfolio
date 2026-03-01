@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg:      #03050C;
+    --s1:      #090D1A;
+    --s2:      #0E1428;
+    --s3:      #121A33;
+    --bd:      rgba(148, 163, 184, 0.06);
+    --bd2:     rgba(148, 163, 184, 0.12);
+    --text:    #f8fafc;
+    --muted:   #94a3b8;
+    --dim:     #475569;
+    
+    /* Premium Gradient Palette */
+    --g:       #2dd4bf;   /* Teal accent */
+    --g2:      #0ea5e9;   /* Sky bright */
+    --gdim:    rgba(45, 212, 191, 0.08);
+    --gbright: rgba(45, 212, 191, 0.2);
+    
+    --blue:    #38bdf8;
+    --bluedim: rgba(56, 189, 248, 0.08);
+    --purp:    #c084fc;
+    --purpdim: rgba(192, 132, 252, 0.08);
+    --org:     #fb923c;
+    --orgdim:  rgba(251, 146, 60, 0.08);
+    --yel:     #fbbf24;
+    --yeldim:  rgba(251, 191, 36, 0.08);
+    --pink:    #f472b6;
+    --pinkdim: rgba(244, 114, 182, 0.08);
+    --teal:    #2dd4bf;
+    --tealdim: rgba(45, 212, 191, 0.08);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--s3); border-radius: 6px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--g); }
+  ::selection { background: rgba(45, 212, 191, 0.25); color: #fff; }
+}
+
+@layer utilities {
+  /* ── Text gradient ── */
+  .gradient-text {
+    background: linear-gradient(135deg, #fff 10%, #2dd4bf 70%, #0ea5e9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .gradient-text-alt {
+    background: linear-gradient(135deg, #c084fc 0%, #38bdf8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ── Glass card ── */
+  .glass {
+    background: rgba(9, 13, 26, 0.65);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    border: 1px solid var(--bd);
+    transition: background 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+  }
+  
+  .glass:hover {
+    background: rgba(14, 20, 40, 0.85);
+    border-color: rgba(45, 212, 191, 0.2);
+  }
+
+  /* ── Glow effects ── */
+  .glow-g    { box-shadow: 0 0 30px rgba(45, 212, 191, 0.15), 0 0 8px rgba(45, 212, 191, 0.1); }
+  .glow-g-sm { box-shadow: 0 0 15px rgba(45, 212, 191, 0.12); }
+  
+  /* Modern soft shadow for components */
+  .shadow-soft {
+    box-shadow: 0 4px 40px -2px rgba(0, 0, 0, 0.4);
+  }
+
+  /* ── Section label (monospace prefix) ── */
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--g);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .section-label::before { content: '//'; color: var(--dim); margin-right: 2px; }
+
+  /* ── Dot grid background ── */
+  .dot-grid {
+    background-image: radial-gradient(rgba(148,163,184,0.08) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  /* ── Line grid background ── */
+  .line-grid {
+    background-image:
+      linear-gradient(rgba(148,163,184,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148,163,184,0.03) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  /* ── Noise overlay ── */
+  .noise::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 10;
+    mix-blend-mode: overlay;
+  }
+}
