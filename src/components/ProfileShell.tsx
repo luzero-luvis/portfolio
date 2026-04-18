@@ -51,10 +51,6 @@ export default function ProfileShell() {
   const scrollRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
-    inputRef.current?.focus()
-  }, [])
-
-  useEffect(() => {
     const node = scrollRef.current
     if (node) node.scrollTop = node.scrollHeight
   }, [history])
@@ -99,7 +95,7 @@ export default function ProfileShell() {
     <div
       className="glass shadow-soft rounded-2xl overflow-hidden transition-all duration-300"
       style={{ border: '1px solid rgba(30,39,46,0.9)' }}
-      onClick={() => inputRef.current?.focus()}
+      onClick={() => inputRef.current?.focus({ preventScroll: true })}
     >
       <div className="flex items-center gap-1.5 px-4 py-3" style={{ background: '#000000', borderBottom: '1px solid rgba(0,255,65,0.1)' }}>
         <div className="w-3 h-3 rounded-full" style={{ background: '#ff5f57' }} />
