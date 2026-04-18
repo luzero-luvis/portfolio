@@ -37,11 +37,11 @@ const CYBER_COLORS: Record<string, { border: string; bg: string; text: string; b
 }
 
 type SkillVisual =
-  | { type: 'logo'; src: string; alt: string; bg?: string; padding?: string }
+  | { type: 'logo'; src: string; alt: string; bg?: string; padding?: string; wide?: boolean }
   | { type: 'badge'; label: string; fg: string; bg: string }
 
 const SKILL_VISUALS: Record<string, SkillVisual> = {
-  AWS: { type: 'logo', src: 'https://cdn.simpleicons.org/amazonwebservices/FF9900', alt: 'AWS logo' },
+  AWS: { type: 'logo', src: '/aws-logo.svg', alt: 'AWS logo', bg: 'rgba(255,153,0,0.08)', padding: '2px 6px', wide: true },
   GCP: { type: 'logo', src: 'https://cdn.simpleicons.org/googlecloud/4285F4', alt: 'Google Cloud logo' },
   Terraform: { type: 'logo', src: 'https://cdn.simpleicons.org/terraform/844FBA', alt: 'Terraform logo' },
   Ansible: { type: 'logo', src: 'https://cdn.simpleicons.org/ansible/EE0000', alt: 'Ansible logo' },
@@ -80,8 +80,13 @@ const CATEGORY_VISUALS: Record<string, string> = {
 function SkillIcon({ skill, size = 'sm' }: { skill: string; size?: 'sm' | 'md' }) {
   const visual = SKILL_VISUALS[skill]
   const isMd = size === 'md'
-  const wrapperClass = isMd ? 'w-8 h-8 rounded-lg' : 'w-7 h-7 rounded-md'
-  const imageClass = isMd ? 'w-5 h-5 object-contain' : 'w-4 h-4 object-contain'
+  const isWide = visual?.type === 'logo' && visual.wide
+  const wrapperClass = isMd
+    ? (isWide ? 'w-12 h-8 rounded-lg' : 'w-8 h-8 rounded-lg')
+    : (isWide ? 'w-10 h-7 rounded-md' : 'w-7 h-7 rounded-md')
+  const imageClass = isMd
+    ? (isWide ? 'w-9 h-5 object-contain' : 'w-5 h-5 object-contain')
+    : (isWide ? 'w-8 h-4 object-contain' : 'w-4 h-4 object-contain')
   const badgeClass = isMd
     ? 'w-8 h-8 rounded-lg flex items-center justify-center shrink-0 font-mono text-[0.7rem] font-bold'
     : 'w-7 h-7 rounded-md flex items-center justify-center shrink-0 font-mono text-[0.68rem] font-bold'
@@ -127,10 +132,12 @@ function SkillIcon({ skill, size = 'sm' }: { skill: string; size?: 'sm' | 'md' }
 
 function CategoryIcon({ category, colors }: { category: string; colors: { border: string; bg: string } }) {
   const visual = CATEGORY_VISUALS[category] ?? category
+  const skillVisual = SKILL_VISUALS[visual]
+  const isWide = skillVisual?.type === 'logo' && skillVisual.wide
 
   return (
     <div
-      className="w-12 h-12 rounded-xl shrink-0 flex items-center justify-center overflow-hidden"
+      className={`${isWide ? 'w-16 h-12 rounded-xl' : 'w-12 h-12 rounded-xl'} shrink-0 flex items-center justify-center overflow-hidden`}
       style={{
         background: `radial-gradient(circle at top left, ${colors.bg}, rgba(10,14,17,0.96))`,
         boxShadow: `0 0 0 1px ${colors.border}25, inset 0 0 18px rgba(255,255,255,0.03)`,
