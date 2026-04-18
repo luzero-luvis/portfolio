@@ -31,13 +31,13 @@ export const themeColors: Record<Theme, ThemeColors> = {
 }
 
 export const skillCategories: SkillCategory[] = [
-  { name: 'Cloud & Infrastructure',      icon: '☁️', theme: 'blue',   skills: ['AWS', 'GCP', 'Amazon EKS', 'Terraform', 'Ansible', 'Maven'] },
+  { name: 'Cloud & Infrastructure',      icon: '☁️', theme: 'blue',   skills: ['AWS', 'GCP', 'Terraform', 'Ansible'] },
   { name: 'Containers & Orchestration',  icon: '🐳', theme: 'teal',   skills: ['Docker', 'Docker Swarm', 'Kubernetes'] },
-  { name: 'CI/CD & GitOps',              icon: '⚡', theme: 'orange', skills: ['Jenkins', 'GitHub Actions', 'GitOps', 'FluxCD'] },
+  { name: 'CI/CD & GitOps',              icon: '⚡', theme: 'orange', skills: ['Jenkins', 'GitHub Actions', 'GitOps'] },
   { name: 'Monitoring & Observability',  icon: '📊', theme: 'purple', skills: ['Prometheus', 'Grafana', 'Loki', 'Grafana Alloy'] },
-  { name: 'Version Control',             icon: '🔀', theme: 'green',  skills: ['Git', 'Git Bash', 'GitHub'] },
-  { name: 'Programming & Scripting',     icon: '💻', theme: 'yellow', skills: ['Go', 'Python', 'Shell Scripting', 'HTML', 'CSS'] },
-  { name: 'Databases',                   icon: '🗄️', theme: 'pink',   skills: ['MongoDB', 'PostgreSQL', 'SQL', 'Oracle Database'] },
+  { name: 'Version Control',             icon: '🔀', theme: 'green',  skills: ['Git', 'GitHub'] },
+  { name: 'Programming & Scripting',     icon: '💻', theme: 'yellow', skills: ['Go', 'Shell Scripting'] },
+  { name: 'Databases',                   icon: '🗄️', theme: 'pink',   skills: ['MongoDB', 'PostgreSQL'] },
   { name: 'Other',                       icon: '🛠️', theme: 'gray',   skills: ['Linux', 'DevOps', 'Troubleshooting'] },
 ]
 

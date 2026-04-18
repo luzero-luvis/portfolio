@@ -25,10 +25,10 @@ function BackToTop() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.8 }}
-          whileHover={{ borderColor: 'var(--g)', color: 'var(--g)', y: -2 }}
+          whileHover={{ y: -2, boxShadow: '0 0 20px rgba(0,255,65,0.4)' }}
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-6 right-6 z-50 w-10 h-10 rounded-xl flex items-center justify-center text-base font-bold transition-colors"
-          style={{ background: 'var(--s2)', border: '1px solid var(--bd)', color: 'var(--muted)' }}
+          className="fixed bottom-6 right-6 z-50 w-10 h-10 rounded-xl flex items-center justify-center font-mono text-base font-bold transition-all"
+          style={{ background: '#0A0E11', border: '1px solid rgba(0,255,65,0.3)', color: '#00FF41' }}
           aria-label="Back to top"
         >
           ↑
