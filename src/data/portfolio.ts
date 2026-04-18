@@ -13,7 +13,7 @@ export const profile = {
 }
 
 export const stats: Stat[] = [
-  { number: '4+',  label: 'Projects Built' },
+  { number: '5+',  label: 'Projects Built' },
   { number: '3+',  label: 'Certifications' },
   { number: '25+', label: 'Tools Mastered' },
   { number: '8.5', label: 'CGPA (BCA)' },
@@ -105,6 +105,22 @@ export const projects: Project[] = [
     ],
     tags: ['Go', 'Chi Router', 'Redis', 'Docker', 'GitHub Actions', 'REST API'],
     githubUrl: 'https://github.com/luzero-luvis/weather-api',
+  },
+  {
+    number: '05',
+    badge: 'Go · API',
+    badgeTheme: 'orange',
+    accentColor: '#fb923c',
+    title: 'Blogging Platform API — Go CRUD Service with PostgreSQL',
+    description: 'Go · Chi Router · PostgreSQL · Slog · Docker Compose',
+    points: [
+      'Built a layered Go REST API with separate handler, service, and repository packages for clean structure.',
+      'Implements create, list, fetch-by-id, and update flows for blog posts backed by PostgreSQL.',
+      'Health endpoint verifies API and database connectivity for faster operational checks.',
+      'Dockerfile and Docker Compose setup make local startup and environment consistency straightforward.',
+    ],
+    tags: ['Go', 'Chi Router', 'PostgreSQL', 'Slog', 'Docker', 'Docker Compose', 'REST API'],
+    githubUrl: 'https://github.com/luzero-luvis/blogging-platform-api',
   },
 ]
 
