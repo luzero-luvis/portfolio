@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { useTypewriter } from '../hooks/useTypewriter'
 import { profile } from '../data/portfolio'
 import { stagger, fadeUp } from '../utils/animations'
+import { navigateToPage } from '../hooks/usePageRoute'
 
 const CODE_ICON = (
   <svg width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -106,20 +107,20 @@ export default function Hero() {
         {/* CTA buttons */}
         <motion.div variants={fadeUp} className="flex gap-4 flex-wrap justify-center mb-10">
           <motion.a
-            href="#projects"
+            href="/projects"
             whileHover={{ y: -3, scale: 1.03, boxShadow: '0 0 30px rgba(0,255,65,0.4)' }}
             whileTap={{ scale: 0.97 }}
-            onClick={e => { e.preventDefault(); document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }) }}
+            onClick={e => { e.preventDefault(); navigateToPage('projects') }}
             className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-mono text-[0.9rem] font-bold transition-all"
             style={{ background: 'transparent', color: '#00FF41', border: '2px solid #00FF41' }}
           >
             {CODE_ICON} View Projects
           </motion.a>
           <motion.a
-            href="#contact"
+            href="/contact"
             whileHover={{ y: -3, scale: 1.03, background: 'rgba(0,255,65,0.08)', borderColor: '#00FF41' }}
             whileTap={{ scale: 0.97 }}
-            onClick={e => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }) }}
+            onClick={e => { e.preventDefault(); navigateToPage('contact') }}
             className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-mono text-[0.9rem] font-semibold border transition-all"
             style={{ background: 'rgba(10,14,17,0.8)', color: '#C5CDD3', borderColor: 'rgba(0,255,65,0.3)' }}
           >

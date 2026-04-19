@@ -10,6 +10,7 @@ import Certificates from './components/Certificates'
 import SoftSkills   from './components/SoftSkills'
 import Contact      from './components/Contact'
 import Footer       from './components/Footer'
+import { usePageRoute } from './hooks/usePageRoute'
 
 function BackToTop() {
   const [show, setShow] = useState(false)
@@ -39,19 +40,31 @@ function BackToTop() {
 }
 
 export default function App() {
+  const page = usePageRoute()
+
+  const content = {
+    home: (
+      <>
+        <Hero />
+      </>
+    ),
+    about: (
+      <>
+        <About />
+        <SoftSkills />
+      </>
+    ),
+    skills: <Skills />,
+    projects: <Projects />,
+    education: <Education />,
+    certificates: <Certificates />,
+    contact: <Contact />,
+  }[page]
+
   return (
     <>
       <Nav />
-      <main>
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Education />
-        <Certificates />
-        <SoftSkills />
-        <Contact />
-      </main>
+      <main>{content}</main>
       <Footer />
       <BackToTop />
     </>

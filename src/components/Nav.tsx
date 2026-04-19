@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion'
-import { useScrollSpy } from '../hooks/useScrollSpy'
+import { navigateToPage, usePageRoute, type PageId } from '../hooks/usePageRoute'
 
-const NAV_ITEMS = ['about', 'skills', 'projects', 'education', 'certificates', 'contact']
+const NAV_ITEMS: PageId[] = ['about', 'skills', 'projects', 'education', 'certificates', 'contact']
 
 export default function Nav() {
   const [scrolled, setScrolled]     = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const active = useScrollSpy(NAV_ITEMS)
+  const active = usePageRoute()
 
   const { scrollYProgress } = useScroll()
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 })
@@ -18,16 +18,12 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', handler)
   }, [])
 
-  const handleNav = (id: string) => {
-    if (id === 'home') {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-    } else {
-      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
-    }
+  const handleNav = (id: PageId) => {
+    navigateToPage(id)
     setMobileOpen(false)
   }
 
-  const allItems = ['home', ...NAV_ITEMS]
+  const allItems: PageId[] = ['home', ...NAV_ITEMS]
 
   return (
     <>
@@ -49,9 +45,9 @@ export default function Nav() {
 
           {/* Logo */}
           <button
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={() => handleNav('home')}
             className="font-mono text-[1.15rem] font-bold shrink-0 mr-4 transition-opacity hover:opacity-80 tracking-tight"
-            aria-label="Back to top"
+            aria-label="Go to home page"
           >
             <span style={{ color: '#FFB800' }}>&gt;</span>
             <span style={{ color: '#00FF41' }}>_</span>
@@ -64,13 +60,13 @@ export default function Nav() {
                 <button
                   onClick={() => handleNav(id)}
                   className="relative px-3 py-1.5 rounded-md font-mono text-[0.82rem] transition-all duration-200"
-                  style={{ color: (active === id || (id === 'home' && !active)) ? '#00FF41' : '#7A8894' }}
+                  style={{ color: active === id ? '#00FF41' : '#7A8894' }}
                 >
-                  {(active === id || (id === 'home' && !active)) && (
+                  {active === id && (
                     <span className="mr-1 font-bold" style={{ color: '#FFB800' }}>$</span>
                   )}
                   {id}
-                  {(active === id || (id === 'home' && !active)) && (
+                  {active === id && (
                     <motion.div
                       layoutId="nav-indicator"
                       className="absolute bottom-0 left-2 right-2 h-[1px]"
