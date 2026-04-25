@@ -5,6 +5,7 @@ import Hero         from './components/Hero'
 import About        from './components/About'
 import Skills       from './components/Skills'
 import Projects     from './components/Projects'
+import Blogs        from './components/Blogs'
 import Education    from './components/Education'
 import Certificates from './components/Certificates'
 import SoftSkills   from './components/SoftSkills'
@@ -56,6 +57,7 @@ export default function App() {
     ),
     skills: <Skills />,
     projects: <Projects />,
+    blogs: <Blogs />,
     education: <Education />,
     certificates: <Certificates />,
     contact: <Contact />,

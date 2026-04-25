@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-export const PAGE_IDS = ['home', 'about', 'skills', 'projects', 'education', 'certificates', 'contact'] as const
+export const PAGE_IDS = ['home', 'about', 'skills', 'projects', 'blogs', 'education', 'certificates', 'contact'] as const
 
 export type PageId = typeof PAGE_IDS[number]
 

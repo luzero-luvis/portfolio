@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion'
 import { navigateToPage, usePageRoute, type PageId } from '../hooks/usePageRoute'
 
-const NAV_ITEMS: PageId[] = ['about', 'skills', 'projects', 'education', 'certificates', 'contact']
+const NAV_ITEMS: PageId[] = ['about', 'skills', 'projects', 'blogs', 'education', 'certificates', 'contact']
 
 export default function Nav() {
   const [scrolled, setScrolled]     = useState(false)

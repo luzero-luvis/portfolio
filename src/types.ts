@@ -26,6 +26,26 @@ export interface Project {
   githubUrl: string
 }
 
+export interface BlogSection {
+  heading: string
+  paragraphs: string[]
+}
+
+export interface BlogPost {
+  slug: string
+  title: string
+  category: string
+  repo: string
+  readTime: string
+  accentColor: string
+  summary: string
+  highlight: string
+  stack: string[]
+  takeaways: string[]
+  githubUrl: string
+  sections: BlogSection[]
+}
+
 export interface Education {
   years: string
   school: string
