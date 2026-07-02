@@ -27,50 +27,44 @@ export default function Nav() {
 
   return (
     <>
-      {/* Scan-line sweep */}
-      <div className="scanline-overlay" aria-hidden="true" />
-
-      {/* Progress bar */}
-      <div className="fixed top-0 left-0 right-0 z-[300] h-[2px]" style={{ background: 'transparent' }}>
-        <motion.div style={{ scaleX, transformOrigin: '0%', height: '100%', background: 'linear-gradient(90deg, #00FF41, #00CC33)' }} />
+      {/* Scroll progress bar */}
+      <div className="fixed top-0 left-0 right-0 z-[300] h-[3px]" style={{ background: 'transparent' }}>
+        <motion.div style={{ scaleX, transformOrigin: '0%', height: '100%', background: '#d2ff00' }} />
       </div>
 
       <nav
         className="fixed top-0 left-0 right-0 z-[200] transition-all duration-300"
         style={scrolled
-          ? { background: 'rgba(0,0,0,0.92)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(0,255,65,0.12)' }
+          ? { background: 'rgba(235,238,224,0.85)', backdropFilter: 'blur(16px)', borderBottom: '1px solid #dde1d2' }
           : { background: 'transparent' }}
       >
-        <div className="max-w-[1100px] mx-auto flex items-center h-16 px-6 gap-2">
+        <div className="max-w-[1200px] mx-auto flex items-center h-[72px] px-6 gap-2">
 
-          {/* Logo */}
+          {/* Logo — Brier wordmark */}
           <button
             onClick={() => handleNav('home')}
-            className="font-mono text-[1.15rem] font-bold shrink-0 mr-4 transition-opacity hover:opacity-80 tracking-tight"
+            className="font-display text-[1.5rem] shrink-0 mr-6 transition-opacity hover:opacity-70"
+            style={{ color: '#111112' }}
             aria-label="Go to home page"
           >
-            <span style={{ color: '#FFB800' }}>&gt;</span>
-            <span style={{ color: '#00FF41' }}>_</span>
+            LUVIS<span style={{ color: '#ff6b00' }}>.</span>
           </button>
 
           {/* Desktop nav */}
-          <ul className="hidden md:flex gap-0.5 list-none flex-1">
+          <ul className="hidden md:flex gap-1 list-none flex-1">
             {allItems.map(id => (
               <li key={id}>
                 <button
                   onClick={() => handleNav(id)}
-                  className="relative px-3 py-1.5 rounded-md font-mono text-[0.82rem] transition-all duration-200"
-                  style={{ color: active === id ? '#00FF41' : '#7A8894' }}
+                  className="relative px-3 py-2 text-[0.82rem] font-semibold uppercase tracking-wider transition-colors duration-200"
+                  style={{ color: active === id ? '#111112' : '#535450' }}
                 >
-                  {active === id && (
-                    <span className="mr-1 font-bold" style={{ color: '#FFB800' }}>$</span>
-                  )}
                   {id}
                   {active === id && (
                     <motion.div
                       layoutId="nav-indicator"
-                      className="absolute bottom-0 left-2 right-2 h-[1px]"
-                      style={{ background: '#00FF41' }}
+                      className="absolute -bottom-0.5 left-3 right-3 h-[2px]"
+                      style={{ background: '#d2ff00' }}
                       initial={false}
                       transition={{ duration: 0.2 }}
                     />
@@ -81,11 +75,7 @@ export default function Nav() {
           </ul>
 
           {/* Hire Me */}
-          <a
-            href="mailto:luvisjoston@gmail.com"
-            className="hidden md:inline-flex shrink-0 items-center px-4 py-2 rounded-lg font-mono text-[0.8rem] font-bold transition-all duration-200 hover:-translate-y-0.5 glow-g-sm"
-            style={{ background: '#00FF41', color: '#000000', border: '1px solid #00FF41' }}
-          >
+          <a href="mailto:luvisjoston@gmail.com" className="hidden md:inline-flex pill shrink-0" style={{ padding: '10px 22px', fontSize: '0.8rem' }}>
             Hire Me
           </a>
 
@@ -95,9 +85,9 @@ export default function Nav() {
             onClick={() => setMobileOpen(o => !o)}
             aria-label="Toggle menu"
           >
-            <motion.span animate={{ rotate: mobileOpen ? 45 : 0, y: mobileOpen ? 7 : 0 }} className="block w-[22px] h-[2px] rounded-sm" style={{ background: '#00FF41' }} />
-            <motion.span animate={{ opacity: mobileOpen ? 0 : 1 }} className="block w-[22px] h-[2px] rounded-sm" style={{ background: '#00FF41' }} />
-            <motion.span animate={{ rotate: mobileOpen ? -45 : 0, y: mobileOpen ? -7 : 0 }} className="block w-[22px] h-[2px] rounded-sm" style={{ background: '#00FF41' }} />
+            <motion.span animate={{ rotate: mobileOpen ? 45 : 0, y: mobileOpen ? 7 : 0 }} className="block w-[24px] h-[2px] rounded-sm" style={{ background: '#111112' }} />
+            <motion.span animate={{ opacity: mobileOpen ? 0 : 1 }} className="block w-[24px] h-[2px] rounded-sm" style={{ background: '#111112' }} />
+            <motion.span animate={{ rotate: mobileOpen ? -45 : 0, y: mobileOpen ? -7 : 0 }} className="block w-[24px] h-[2px] rounded-sm" style={{ background: '#111112' }} />
           </button>
         </div>
 
@@ -110,27 +100,20 @@ export default function Nav() {
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.25 }}
               className="overflow-hidden md:hidden"
-              style={{ background: '#0A0E11', borderTop: '1px solid rgba(0,255,65,0.12)' }}
+              style={{ background: '#ebeee0', borderTop: '1px solid #dde1d2' }}
             >
               <div className="flex flex-col px-6 py-3">
                 {allItems.map(id => (
                   <button
                     key={id}
                     onClick={() => handleNav(id)}
-                    className="py-3 text-left font-mono text-sm border-b last:border-b-0 transition-colors flex items-center gap-2"
-                    style={{ color: active === id ? '#00FF41' : '#7A8894', borderColor: 'rgba(0,255,65,0.08)' }}
+                    className="py-3 text-left text-sm font-semibold uppercase tracking-wider border-b last:border-b-0 transition-colors"
+                    style={{ color: active === id ? '#111112' : '#535450', borderColor: '#dde1d2' }}
                   >
-                    <span style={{ color: '#FFB800' }}>$</span>
                     {id}
                   </button>
                 ))}
-                <a
-                  href="mailto:luvisjoston@gmail.com"
-                  className="mt-3 mb-1 py-2.5 text-center rounded-lg font-mono text-sm font-bold"
-                  style={{ background: '#00FF41', color: '#000000' }}
-                >
-                  Hire Me
-                </a>
+                <a href="mailto:luvisjoston@gmail.com" className="pill mt-4 mb-1 justify-center">Hire Me</a>
               </div>
             </motion.div>
           )}

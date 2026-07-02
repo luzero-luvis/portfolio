@@ -93,29 +93,28 @@ export default function ProfileShell() {
 
   return (
     <div
-      className="glass shadow-soft rounded-2xl overflow-hidden transition-all duration-300"
-      style={{ border: '1px solid rgba(30,39,46,0.9)' }}
+      className="card-dark overflow-hidden"
       onClick={() => inputRef.current?.focus({ preventScroll: true })}
     >
-      <div className="flex items-center gap-1.5 px-4 py-3" style={{ background: '#000000', borderBottom: '1px solid rgba(0,255,65,0.1)' }}>
-        <div className="w-3 h-3 rounded-full" style={{ background: '#ff5f57' }} />
-        <div className="w-3 h-3 rounded-full" style={{ background: '#febc2e' }} />
-        <div className="w-3 h-3 rounded-full" style={{ background: '#28c840' }} />
-        <span className="ml-2 font-mono text-[0.68rem]" style={{ color: '#5A6873' }}>luvis@devops: ~/portfolio/about</span>
+      <div className="flex items-center gap-1.5 px-4 py-3" style={{ background: 'rgba(0,0,0,0.35)', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+        <div className="w-3 h-3 rounded-full" style={{ background: '#ff4c24' }} />
+        <div className="w-3 h-3 rounded-full" style={{ background: '#ff6b00' }} />
+        <div className="w-3 h-3 rounded-full" style={{ background: '#d2ff00' }} />
+        <span className="ml-2 font-mono text-[0.68rem]" style={{ color: '#b4b8a5' }}>luvis@devops: ~/portfolio/about</span>
       </div>
 
       <div
         ref={scrollRef}
         className="p-7 min-h-[430px] max-h-[430px] overflow-y-auto"
-        style={{ background: 'linear-gradient(180deg, rgba(10,14,17,0.96), rgba(5,7,8,0.98))' }}
+        style={{ background: 'rgba(0,0,0,0.25)' }}
       >
         <div className="space-y-4">
           {history.map(entry => (
             <div key={entry.id}>
               {entry.type === 'command' && (
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="font-mono text-[0.82rem]" style={{ color: '#FFB800' }}>$</span>
-                  <span className="font-mono text-[0.82rem]" style={{ color: '#00D9FF' }}>{entry.lines[0]}</span>
+                  <span className="font-mono text-[0.82rem]" style={{ color: '#d2ff00' }}>$</span>
+                  <span className="font-mono text-[0.82rem]" style={{ color: '#ff6b00' }}>{entry.lines[0]}</span>
                 </div>
               )}
 
@@ -128,10 +127,10 @@ export default function ProfileShell() {
                       style={{
                         color:
                           entry.type === 'error'
-                            ? '#FF6B35'
+                            ? '#ff4c24'
                             : entry.type === 'hint'
-                              ? '#7A8894'
-                              : '#C5CDD3',
+                              ? '#b4b8a5'
+                              : '#ebeee0',
                       }}
                     >
                       {line}
@@ -151,20 +150,20 @@ export default function ProfileShell() {
             }}
             className="flex items-center gap-2 pt-2"
           >
-            <span className="font-mono text-[0.82rem]" style={{ color: '#FFB800' }}>$</span>
+            <span className="font-mono text-[0.82rem]" style={{ color: '#d2ff00' }}>$</span>
             <input
               ref={inputRef}
               value={input}
               onChange={e => setInput(e.target.value)}
               className="flex-1 bg-transparent border-0 outline-none font-mono text-[0.82rem]"
-              style={{ color: '#00FF41' }}
+              style={{ color: '#d2ff00', caretColor: '#d2ff00' }}
               spellCheck={false}
               autoCapitalize="off"
               autoComplete="off"
               aria-label="Terminal command input"
               placeholder="type `whoami`"
             />
-            <span className="animate-blink inline-block w-[8px] h-[1em]" style={{ background: '#00FF41' }} />
+            <span className="animate-blink inline-block w-[8px] h-[1em]" style={{ background: '#d2ff00' }} />
           </form>
         </div>
       </div>
