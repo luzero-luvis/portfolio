@@ -6,7 +6,6 @@ const LI_ICON = (<svg width="18" height="18" fill="currentColor" viewBox="0 0 24
 const ML_ICON = (<svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>)
 
 export default function Footer() {
-  const year = new Date().getFullYear()
   return (
     <footer style={{ background: '#111112' }}>
       <div className="border-y" style={{ borderColor: 'rgba(255,255,255,0.12)' }}>
@@ -17,10 +16,9 @@ export default function Footer() {
         <div className="max-w-[1200px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="text-center sm:text-left">
             <div className="font-display text-[1.6rem]" style={{ color: '#ebeee0' }}>
-              LUVIS<span style={{ color: '#ff6b00' }}>.</span>
+              LUVIS JOSTON J<span style={{ color: '#ff6b00' }}>.</span>
             </div>
             <div className="text-[0.8rem] mt-1" style={{ color: '#b4b8a5' }}>DevOps Engineer · {profile.location}</div>
-            <div className="text-[0.72rem] mt-1" style={{ color: '#535450' }}>© {year} · Built with React · TypeScript · Tailwind · Framer Motion</div>
           </div>
 
           <div className="flex items-center gap-3">

@@ -23,7 +23,7 @@ export default function About() {
           dark
           kicker="About"
           title="Turning infrastructure into production reality"
-          subtitle="I design, automate, and deploy systems that carry code to production on AWS and GCP — GitOps pipelines, Kubernetes platforms, and observability stacks built to be reliable and repeatable."
+          subtitle="I design, automate, and deploy systems that carry code to production on AWS, GCP, and Hetzner — GitOps pipelines, Kubernetes platforms, and observability stacks built to be reliable and repeatable."
         />
 
         <div className="grid lg:grid-cols-[1fr_360px] gap-8 items-start">
@@ -40,7 +40,7 @@ export default function About() {
               <div className="space-y-3.5">
                 {[
                   { label: 'Experience',      value: '1+ years' },
-                  { label: 'Cloud Platforms', value: 'AWS, GCP' },
+                  { label: 'Cloud Platforms', value: 'AWS, GCP, Hetzner' },
                   { label: 'Projects',        value: `${stats.find(s => s.label === 'Projects Built')?.number ?? '5+'} deployed` },
                   { label: 'Technologies',    value: `${stats.find(s => s.label === 'Tools Mastered')?.number ?? '25+'} mastered` },
                 ].map(row => (

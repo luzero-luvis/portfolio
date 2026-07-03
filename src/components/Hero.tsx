@@ -5,7 +5,7 @@ import { stagger, fadeUp } from '../utils/animations'
 import { navigateToPage } from '../hooks/usePageRoute'
 import Marquee from './Marquee'
 
-const TECH = ['AWS', 'KUBERNETES', 'TERRAFORM', 'GITOPS', 'DOCKER', 'PROMETHEUS', 'GO', 'JENKINS', 'GRAFANA', 'FLUXCD']
+const TECH = ['AWS', 'GCP', 'HETZNER', 'KUBERNETES', 'TERRAFORM', 'GITOPS', 'DOCKER', 'PROMETHEUS', 'GO', 'JENKINS', 'GRAFANA', 'FLUXCD']
 
 export default function Hero() {
   const text = useTypewriter(profile.roles)
@@ -30,7 +30,7 @@ export default function Hero() {
             style={{ fontSize: 'clamp(3.2rem, 13vw, 11rem)', color: '#111112' }}
           >
             Luvis<br />
-            <span style={{ color: '#111112' }}>Joston</span>
+            <span style={{ color: '#111112' }}>Joston J</span>
           </motion.h1>
 
           {/* Typewriter role */}

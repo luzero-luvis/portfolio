@@ -5,7 +5,7 @@ import type { SkillCategory } from '../types'
 import SectionHeader from './SectionHeader'
 
 const PROFICIENCY: Record<string, number> = {
-  AWS: 70, GCP: 68, Terraform: 70, Ansible: 67,
+  AWS: 70, GCP: 68, Hetzner: 68, Terraform: 70, Ansible: 67,
   Docker: 70, 'Docker Swarm': 64, Kubernetes: 69,
   Jenkins: 70, 'GitHub Actions': 69, GitOps: 67,
   Prometheus: 68, Grafana: 68, Loki: 65, 'Grafana Alloy': 64,
@@ -22,6 +22,7 @@ type SkillVisual =
 const SKILL_VISUALS: Record<string, SkillVisual> = {
   AWS: { type: 'logo', src: '/aws-logo.svg', alt: 'AWS logo', bg: 'rgba(255,153,0,0.1)', padding: '2px 6px', wide: true },
   GCP: { type: 'logo', src: 'https://cdn.simpleicons.org/googlecloud/4285F4', alt: 'Google Cloud logo' },
+  Hetzner: { type: 'logo', src: 'https://cdn.simpleicons.org/hetzner/D50C2D', alt: 'Hetzner logo' },
   Terraform: { type: 'logo', src: 'https://cdn.simpleicons.org/terraform/844FBA', alt: 'Terraform logo' },
   Ansible: { type: 'logo', src: 'https://cdn.simpleicons.org/ansible/EE0000', alt: 'Ansible logo' },
   Docker: { type: 'logo', src: 'https://cdn.simpleicons.org/docker/2496ED', alt: 'Docker logo' },

@@ -3,7 +3,7 @@ import type { SkillCategory, Project, Education, Certificate, Stat, Theme, Theme
 export const profile = {
   name: 'Luvis Joston J',
   roles: ['DevOps Engineer', 'GitOps Practitioner', 'Cloud Architect', 'Kubernetes Engineer', 'Go Developer'],
-  bio: 'DevOps Engineer building production-grade cloud infrastructure, GitOps pipelines, and full observability stacks on AWS & GCP. Turning complex systems into reliable, automated, and observable platforms.',
+  bio: 'DevOps Engineer working with cloud infrastructure, GitOps pipelines, CI/CD, and observability tooling on AWS, GCP & Hetzner.',
   location: 'Bengaluru, India',
   email: 'luvisjoston@gmail.com',
   phone: '+91 7338268238',
@@ -31,7 +31,7 @@ export const themeColors: Record<Theme, ThemeColors> = {
 }
 
 export const skillCategories: SkillCategory[] = [
-  { name: 'Cloud & Infrastructure',      icon: '☁️', theme: 'blue',   skills: ['AWS', 'GCP', 'Terraform', 'Ansible'] },
+  { name: 'Cloud & Infrastructure',      icon: '☁️', theme: 'blue',   skills: ['AWS', 'GCP', 'Hetzner', 'Terraform', 'Ansible'] },
   { name: 'Containers & Orchestration',  icon: '🐳', theme: 'teal',   skills: ['Docker', 'Docker Swarm', 'Kubernetes'] },
   { name: 'CI/CD & GitOps',              icon: '⚡', theme: 'orange', skills: ['Jenkins', 'GitHub Actions', 'GitOps'] },
   { name: 'Monitoring & Observability',  icon: '📊', theme: 'purple', skills: ['Prometheus', 'Grafana', 'Loki', 'Grafana Alloy'] },

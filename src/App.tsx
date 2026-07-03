@@ -6,13 +6,14 @@ import About        from './components/About'
 import Skills       from './components/Skills'
 import Projects     from './components/Projects'
 import Blogs        from './components/Blogs'
+import BlogPostPage from './components/BlogPostPage'
 import Education    from './components/Education'
 import Certificates from './components/Certificates'
 import SoftSkills   from './components/SoftSkills'
 import Contact      from './components/Contact'
 import Footer       from './components/Footer'
 import Loader       from './components/Loader'
-import { usePageRoute } from './hooks/usePageRoute'
+import { usePageRoute, useBlogSlug } from './hooks/usePageRoute'
 
 function BackToTop() {
   const [show, setShow] = useState(false)
@@ -43,6 +44,7 @@ function BackToTop() {
 
 export default function App() {
   const page = usePageRoute()
+  const blogSlug = useBlogSlug()
 
   const content = {
     home: <Hero />,
@@ -54,20 +56,21 @@ export default function App() {
     ),
     skills: <Skills />,
     projects: <Projects />,
-    blogs: <Blogs />,
+    blogs: blogSlug ? <BlogPostPage slug={blogSlug} /> : <Blogs />,
     education: <Education />,
     certificates: <Certificates />,
     contact: <Contact />,
   }[page]
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <Loader />
       <Nav />
-      <main>
+      <main className="flex-1 flex flex-col">
         <AnimatePresence mode="wait">
           <motion.div
-            key={page}
+            key={page + (blogSlug ?? '')}
+            className="flex-1 flex flex-col"
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -24 }}
@@ -79,6 +82,6 @@ export default function App() {
       </main>
       <Footer />
       <BackToTop />
-    </>
+    </div>
   )
 }

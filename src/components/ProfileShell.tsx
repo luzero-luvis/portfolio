@@ -9,13 +9,13 @@ type ShellEntry = {
 
 const ABOUT_LINES = [
   `Hello, I'm ${profile.name}, and I turn infrastructure into production reality.`,
-  'I design, automate, and deploy systems that turn code into production-grade reality on AWS and GCP.',
+  'I design, automate, and deploy systems that turn code into production-grade reality on AWS, GCP, and Hetzner.',
   'My work spans GitOps pipelines, Kubernetes platforms, observability stacks, and Go-based backend services.',
   "I care about precision, repeatability, and systems that are automated and observable end-to-end.",
 ]
 
 const SKILL_LINES = [
-  'Cloud: AWS, GCP, Terraform, Ansible',
+  'Cloud: AWS, GCP, Hetzner, Terraform, Ansible',
   'Containers: Docker, Docker Swarm, Kubernetes',
   'CI/CD: Jenkins, GitHub Actions, GitOps',
   'Observability: Prometheus, Grafana, Loki, Grafana Alloy',
@@ -36,6 +36,16 @@ const INITIAL_HISTORY: ShellEntry[] = [
     id: 1,
     type: 'hint',
     lines: ['Interactive profile shell ready. Type `whoami` or `help`.'],
+  },
+  {
+    id: 2,
+    type: 'command',
+    lines: ['whoami'],
+  },
+  {
+    id: 3,
+    type: 'output',
+    lines: ABOUT_LINES,
   },
 ]
 
@@ -105,7 +115,7 @@ export default function ProfileShell() {
 
       <div
         ref={scrollRef}
-        className="p-7 min-h-[430px] max-h-[430px] overflow-y-auto"
+        className="p-7 min-h-[260px] max-h-[430px] overflow-y-auto"
         style={{ background: 'rgba(0,0,0,0.25)' }}
       >
         <div className="space-y-4">
@@ -161,9 +171,8 @@ export default function ProfileShell() {
               autoCapitalize="off"
               autoComplete="off"
               aria-label="Terminal command input"
-              placeholder="type `whoami`"
+              placeholder="try `skills` or `help`"
             />
-            <span className="animate-blink inline-block w-[8px] h-[1em]" style={{ background: '#d2ff00' }} />
           </form>
         </div>
       </div>

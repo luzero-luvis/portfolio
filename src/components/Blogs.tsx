@@ -4,6 +4,7 @@ import { blogPosts } from '../data/blogPosts'
 import { fadeUp, stagger, viewport } from '../utils/animations'
 import type { BlogPost } from '../types'
 import SectionHeader from './SectionHeader'
+import { navigateToBlogPost } from '../hooks/usePageRoute'
 
 const GH_ICON = (
   <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24">
@@ -11,18 +12,25 @@ const GH_ICON = (
   </svg>
 )
 
-function BlogCard({ post, expanded, onToggle }: { post: BlogPost; expanded: boolean; onToggle: (slug: string) => void }) {
+const ARROW_ICON = (
+  <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+    <path d="M5 12h14M13 5l7 7-7 7" />
+  </svg>
+)
+
+function BlogCard({ post }: { post: BlogPost }) {
+  const open = () => navigateToBlogPost(post.slug)
   return (
     <motion.article
       layout
       variants={fadeUp}
       initial="hidden"
       animate="visible"
+      exit={{ opacity: 0, scale: 0.97 }}
       whileHover={{ y: -5 }}
-      className="card overflow-hidden"
+      className="card overflow-hidden cursor-pointer"
+      onClick={open}
     >
-      <div className="h-1.5" style={{ background: '#d2ff00' }} />
-
       <div className="p-7">
         <div className="flex items-start justify-between gap-4 mb-4 flex-wrap">
           <div className="flex flex-wrap items-center gap-2">
@@ -36,6 +44,7 @@ function BlogCard({ post, expanded, onToggle }: { post: BlogPost; expanded: bool
             href={post.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={e => e.stopPropagation()}
             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[0.76rem] font-semibold transition-all shrink-0"
             style={{ background: '#ebeee0', border: '1px solid #dde1d2', color: '#282c20' }}
           >
@@ -44,68 +53,22 @@ function BlogCard({ post, expanded, onToggle }: { post: BlogPost; expanded: bool
         </div>
 
         <h3 className="font-display text-[1.5rem] leading-[1.05] mb-3" style={{ color: '#111112' }}>{post.title}</h3>
-        <p className="text-[0.95rem] leading-[1.7] mb-4" style={{ color: '#535450' }}>{post.summary}</p>
+        <p className="text-[0.95rem] leading-[1.7] mb-5" style={{ color: '#535450' }}>{post.summary}</p>
 
-        <div className="rounded-xl p-4 mb-4" style={{ background: '#ebeee0', border: '1px solid #dde1d2' }}>
-          <p className="text-[0.85rem] leading-[1.7]" style={{ color: '#282c20' }}>{post.highlight}</p>
-        </div>
-
-        <div className="flex flex-wrap gap-1.5 mb-5">
-          {post.stack.map(item => (
+        <div className="flex flex-wrap gap-1.5 mb-6">
+          {post.stack.slice(0, 5).map(item => (
             <span key={item} className="text-[0.7rem] font-medium px-2.5 py-1 rounded-full" style={{ background: '#ebeee0', border: '1px solid #dde1d2', color: '#535450' }}>
               {item}
             </span>
           ))}
         </div>
 
-        <div className="mb-5">
-          <h4 className="text-[0.72rem] font-bold uppercase tracking-[0.2em] mb-3" style={{ color: '#535450' }}>Key Takeaways</h4>
-          <ul className="space-y-2">
-            {post.takeaways.map(item => (
-              <li key={item} className="flex gap-2.5 text-[0.86rem] leading-[1.55]" style={{ color: '#535450' }}>
-                <span className="shrink-0 mt-[2px]" style={{ color: '#ff6b00' }}>▸</span>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <button
-          onClick={() => onToggle(post.slug)}
-          className="px-5 py-2.5 rounded-full text-[0.8rem] font-bold uppercase tracking-wide transition-all duration-200"
-          style={expanded
-            ? { background: '#d2ff00', color: '#111112' }
-            : { background: 'transparent', color: '#111112', border: '2px solid #111112' }}
+        <span
+          className="inline-flex items-center gap-2 text-[0.8rem] font-bold uppercase tracking-wide"
+          style={{ color: '#111112' }}
         >
-          {expanded ? 'Hide article' : 'Read article'}
-        </button>
-
-        <AnimatePresence initial={false}>
-          {expanded && (
-            <motion.div
-              initial={{ opacity: 0, height: 0, marginTop: 0 }}
-              animate={{ opacity: 1, height: 'auto', marginTop: 24 }}
-              exit={{ opacity: 0, height: 0, marginTop: 0 }}
-              transition={{ duration: 0.25 }}
-              className="overflow-hidden"
-            >
-              <div className="pt-6 border-t" style={{ borderColor: '#dde1d2' }}>
-                <div className="space-y-6">
-                  {post.sections.map(section => (
-                    <section key={section.heading}>
-                      <h4 className="font-bold text-[1.05rem] mb-3" style={{ color: '#111112' }}>{section.heading}</h4>
-                      <div className="space-y-3">
-                        {section.paragraphs.map(paragraph => (
-                          <p key={paragraph} className="text-[0.93rem] leading-[1.75]" style={{ color: '#535450' }}>{paragraph}</p>
-                        ))}
-                      </div>
-                    </section>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+          Read article {ARROW_ICON}
+        </span>
       </div>
     </motion.article>
   )
@@ -113,7 +76,6 @@ function BlogCard({ post, expanded, onToggle }: { post: BlogPost; expanded: bool
 
 export default function Blogs() {
   const [activeCategory, setActiveCategory] = useState('All')
-  const [expandedSlug, setExpandedSlug] = useState(blogPosts[0]?.slug ?? '')
 
   const categories = useMemo(
     () => ['All', ...Array.from(new Set(blogPosts.map(post => post.category)))],
@@ -124,15 +86,13 @@ export default function Blogs() {
     ? blogPosts
     : blogPosts.filter(post => post.category === activeCategory)
 
-  const handleToggle = (slug: string) => setExpandedSlug(current => (current === slug ? '' : slug))
-
   return (
     <section id="blogs" className="py-28 px-6" style={{ background: '#ebeee0' }}>
       <div className="max-w-[1200px] mx-auto">
         <SectionHeader
           kicker="Repo notes"
           title="Build notes"
-          subtitle="Long-form writing based on the repositories behind this portfolio — what was built, why the design choices matter, and what each project taught me."
+          subtitle="Long-form writing based on the repositories behind this portfolio — what was built, why the design choices matter, and what each project taught me. Each post opens on its own page."
         />
 
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewport} className="flex flex-wrap gap-2 mb-8">
@@ -150,11 +110,9 @@ export default function Blogs() {
           ))}
         </motion.div>
 
-        <motion.div layout variants={stagger} initial="hidden" whileInView="visible" viewport={viewport} className="grid gap-5">
+        <motion.div layout variants={stagger} initial="hidden" whileInView="visible" viewport={viewport} className="grid sm:grid-cols-2 gap-5">
           <AnimatePresence mode="popLayout">
-            {visiblePosts.map(post => (
-              <BlogCard key={post.slug} post={post} expanded={expandedSlug === post.slug} onToggle={handleToggle} />
-            ))}
+            {visiblePosts.map(post => <BlogCard key={post.slug} post={post} />)}
           </AnimatePresence>
         </motion.div>
       </div>

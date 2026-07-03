@@ -48,6 +48,10 @@
 
   a { color: inherit; text-decoration: none; }
 
+  /* Short pages: stretch the last section so its background reaches the footer
+     and no body-colored gap shows below it. */
+  main > div > :last-child { flex: 1 1 auto; }
+
   ::-webkit-scrollbar        { width: 10px; }
   ::-webkit-scrollbar-track  { background: var(--cream); }
   ::-webkit-scrollbar-thumb  { background: var(--olive); border-radius: 6px; }
