@@ -4,44 +4,33 @@ import { skillCategories } from '../data/portfolio'
 import type { SkillCategory } from '../types'
 import SectionHeader from './SectionHeader'
 
-const PROFICIENCY: Record<string, number> = {
-  AWS: 70, GCP: 68, Hetzner: 68, Terraform: 70, Ansible: 67,
-  Docker: 70, 'Docker Swarm': 64, Kubernetes: 69,
-  Jenkins: 70, 'GitHub Actions': 69, GitOps: 67,
-  Prometheus: 68, Grafana: 68, Loki: 65, 'Grafana Alloy': 64,
-  Git: 70, GitHub: 69,
-  Go: 68, 'Shell Scripting': 66,
-  MongoDB: 67, PostgreSQL: 68,
-  Linux: 70, DevOps: 69, Troubleshooting: 66,
-}
-
 type SkillVisual =
   | { type: 'logo'; src: string; alt: string; bg?: string; padding?: string; wide?: boolean }
   | { type: 'badge'; label: string; fg: string; bg: string }
 
 const SKILL_VISUALS: Record<string, SkillVisual> = {
   AWS: { type: 'logo', src: '/aws-logo.svg', alt: 'AWS logo', bg: 'rgba(255,153,0,0.1)', padding: '2px 6px', wide: true },
-  GCP: { type: 'logo', src: 'https://cdn.simpleicons.org/googlecloud/4285F4', alt: 'Google Cloud logo' },
-  Hetzner: { type: 'logo', src: 'https://cdn.simpleicons.org/hetzner/D50C2D', alt: 'Hetzner logo' },
-  Terraform: { type: 'logo', src: 'https://cdn.simpleicons.org/terraform/844FBA', alt: 'Terraform logo' },
-  Ansible: { type: 'logo', src: 'https://cdn.simpleicons.org/ansible/EE0000', alt: 'Ansible logo' },
-  Docker: { type: 'logo', src: 'https://cdn.simpleicons.org/docker/2496ED', alt: 'Docker logo' },
-  'Docker Swarm': { type: 'logo', src: 'https://cdn.simpleicons.org/docker/2496ED', alt: 'Docker logo' },
-  Kubernetes: { type: 'logo', src: 'https://cdn.simpleicons.org/kubernetes/326CE5', alt: 'Kubernetes logo' },
-  Jenkins: { type: 'logo', src: 'https://cdn.simpleicons.org/jenkins/D24939', alt: 'Jenkins logo' },
-  'GitHub Actions': { type: 'logo', src: 'https://cdn.simpleicons.org/githubactions/2088FF', alt: 'GitHub Actions logo' },
+  GCP: { type: 'logo', src: '/icons/googlecloud.svg', alt: 'Google Cloud logo' },
+  Hetzner: { type: 'logo', src: '/icons/hetzner.svg', alt: 'Hetzner logo' },
+  Terraform: { type: 'logo', src: '/icons/terraform.svg', alt: 'Terraform logo' },
+  Ansible: { type: 'logo', src: '/icons/ansible.svg', alt: 'Ansible logo' },
+  Docker: { type: 'logo', src: '/icons/docker.svg', alt: 'Docker logo' },
+  'Docker Swarm': { type: 'logo', src: '/icons/docker.svg', alt: 'Docker logo' },
+  Kubernetes: { type: 'logo', src: '/icons/kubernetes.svg', alt: 'Kubernetes logo' },
+  Jenkins: { type: 'logo', src: '/icons/jenkins.svg', alt: 'Jenkins logo' },
+  'GitHub Actions': { type: 'logo', src: '/icons/githubactions.svg', alt: 'GitHub Actions logo' },
   GitOps: { type: 'badge', label: 'GO', fg: '#ff6b00', bg: 'rgba(255,107,0,0.12)' },
-  Prometheus: { type: 'logo', src: 'https://cdn.simpleicons.org/prometheus/E6522C', alt: 'Prometheus logo' },
-  Grafana: { type: 'logo', src: 'https://cdn.simpleicons.org/grafana/F46800', alt: 'Grafana logo' },
-  Loki: { type: 'logo', src: 'https://cdn.simpleicons.org/grafana/F46800', alt: 'Grafana logo' },
-  'Grafana Alloy': { type: 'logo', src: 'https://cdn.simpleicons.org/grafana/F46800', alt: 'Grafana logo' },
-  Git: { type: 'logo', src: 'https://cdn.simpleicons.org/git/F05032', alt: 'Git logo' },
-  GitHub: { type: 'logo', src: 'https://cdn.simpleicons.org/github/181717', alt: 'GitHub logo', bg: 'rgba(0,0,0,0.05)' },
-  Go: { type: 'logo', src: 'https://cdn.simpleicons.org/go/00ADD8', alt: 'Go logo' },
+  Prometheus: { type: 'logo', src: '/icons/prometheus.svg', alt: 'Prometheus logo' },
+  Grafana: { type: 'logo', src: '/icons/grafana.svg', alt: 'Grafana logo' },
+  Loki: { type: 'logo', src: '/icons/grafana.svg', alt: 'Grafana logo' },
+  'Grafana Alloy': { type: 'logo', src: '/icons/grafana.svg', alt: 'Grafana logo' },
+  Git: { type: 'logo', src: '/icons/git.svg', alt: 'Git logo' },
+  GitHub: { type: 'logo', src: '/icons/github.svg', alt: 'GitHub logo', bg: 'rgba(0,0,0,0.05)' },
+  Go: { type: 'logo', src: '/icons/go.svg', alt: 'Go logo' },
   'Shell Scripting': { type: 'badge', label: 'SH', fg: '#282c20', bg: 'rgba(40,44,32,0.1)' },
-  MongoDB: { type: 'logo', src: 'https://cdn.simpleicons.org/mongodb/47A248', alt: 'MongoDB logo' },
-  PostgreSQL: { type: 'logo', src: 'https://cdn.simpleicons.org/postgresql/4169E1', alt: 'PostgreSQL logo' },
-  Linux: { type: 'logo', src: 'https://cdn.simpleicons.org/linux/000000', alt: 'Linux logo' },
+  MongoDB: { type: 'logo', src: '/icons/mongodb.svg', alt: 'MongoDB logo' },
+  PostgreSQL: { type: 'logo', src: '/icons/postgresql.svg', alt: 'PostgreSQL logo' },
+  Linux: { type: 'logo', src: '/icons/linux.svg', alt: 'Linux logo' },
   DevOps: { type: 'badge', label: 'DO', fg: '#b2c73a', bg: 'rgba(178,199,58,0.15)' },
   Troubleshooting: { type: 'badge', label: 'TS', fg: '#535450', bg: 'rgba(83,84,80,0.1)' },
 }
@@ -104,28 +93,14 @@ function CategoryIcon({ category }: { category: string }) {
   )
 }
 
-function SkillBar({ skill }: { skill: string }) {
-  const pct = PROFICIENCY[skill] ?? 70
+function SkillChip({ skill }: { skill: string }) {
   return (
-    <div className="rounded-xl p-4" style={{ background: '#ebeee0', border: '1px solid #dde1d2' }}>
-      <div className="flex items-center gap-2 mb-3">
-        <SkillIcon skill={skill} />
-        <span className="font-semibold text-[0.82rem]" style={{ color: '#282c20' }}>{skill}</span>
-      </div>
-      <div className="flex justify-between mb-1.5">
-        <span className="text-[0.68rem] font-medium" style={{ color: '#535450' }}>Proficiency</span>
-        <span className="text-[0.68rem] font-bold" style={{ color: '#282c20' }}>{pct}%</span>
-      </div>
-      <div className="h-2 rounded-full overflow-hidden" style={{ background: '#dde1d2' }}>
-        <motion.div
-          className="h-full rounded-full"
-          style={{ background: '#282c20' }}
-          initial={{ width: 0 }}
-          whileInView={{ width: pct + '%' }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay: 0.2, ease: 'easeOut' }}
-        />
-      </div>
+    <div
+      className="inline-flex items-center gap-2 pl-2 pr-3.5 py-1.5 rounded-full"
+      style={{ background: '#ebeee0', border: '1px solid #dde1d2' }}
+    >
+      <SkillIcon skill={skill} />
+      <span className="font-semibold text-[0.82rem]" style={{ color: '#282c20' }}>{skill}</span>
     </div>
   )
 }
@@ -137,8 +112,8 @@ function CategoryCard({ cat }: { cat: SkillCategory }) {
         <CategoryIcon category={cat.name} />
         <span className="text-[0.95rem] font-bold leading-tight" style={{ color: '#111112' }}>{cat.name}</span>
       </div>
-      <div className="grid gap-3" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))' }}>
-        {cat.skills.map(skill => <SkillBar key={skill} skill={skill} />)}
+      <div className="flex flex-wrap gap-2">
+        {cat.skills.map(skill => <SkillChip key={skill} skill={skill} />)}
       </div>
     </motion.div>
   )

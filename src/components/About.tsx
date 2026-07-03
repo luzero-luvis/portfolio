@@ -42,7 +42,7 @@ export default function About() {
                   { label: 'Experience',      value: '1+ years' },
                   { label: 'Cloud Platforms', value: 'AWS, GCP, Hetzner' },
                   { label: 'Projects',        value: `${stats.find(s => s.label === 'Projects Built')?.number ?? '5+'} deployed` },
-                  { label: 'Technologies',    value: `${stats.find(s => s.label === 'Tools Mastered')?.number ?? '25+'} mastered` },
+                  { label: 'Technologies',    value: `${stats.find(s => s.label === 'Tools Used')?.number ?? '25+'} used` },
                 ].map(row => (
                   <div key={row.label} className="flex justify-between items-center">
                     <span className="text-[0.88rem]" style={{ color: '#b4b8a5' }}>{row.label}</span>

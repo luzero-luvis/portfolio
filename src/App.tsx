@@ -14,6 +14,18 @@ import Contact      from './components/Contact'
 import Footer       from './components/Footer'
 import Loader       from './components/Loader'
 import { usePageRoute, useBlogSlug } from './hooks/usePageRoute'
+import { blogPosts } from './data/blogPosts'
+
+const PAGE_TITLES: Record<string, string> = {
+  home:         'Luvis Joston J — DevOps Engineer',
+  about:        'About — Luvis Joston J',
+  skills:       'Skills — Luvis Joston J',
+  projects:     'Projects — Luvis Joston J',
+  blogs:        'Blog — Luvis Joston J',
+  education:    'Education — Luvis Joston J',
+  certificates: 'Certificates — Luvis Joston J',
+  contact:      'Contact — Luvis Joston J',
+}
 
 function BackToTop() {
   const [show, setShow] = useState(false)
@@ -45,6 +57,11 @@ function BackToTop() {
 export default function App() {
   const page = usePageRoute()
   const blogSlug = useBlogSlug()
+
+  useEffect(() => {
+    const post = blogSlug ? blogPosts.find(p => p.slug === blogSlug) : undefined
+    document.title = post ? `${post.title} — Luvis Joston J` : PAGE_TITLES[page]
+  }, [page, blogSlug])
 
   const content = {
     home: <Hero />,

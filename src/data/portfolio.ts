@@ -15,7 +15,7 @@ export const profile = {
 export const stats: Stat[] = [
   { number: '5+',  label: 'Projects Built' },
   { number: '3+',  label: 'Certifications' },
-  { number: '25+', label: 'Tools Mastered' },
+  { number: '25+', label: 'Tools Used' },
   { number: '8.5', label: 'CGPA (BCA)' },
 ]
 
