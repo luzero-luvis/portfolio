@@ -71,7 +71,7 @@ export default function ProfileShell() {
     'cat bio.txt': ABOUT_LINES,
     skills: SKILL_LINES,
     pwd: ['~/portfolio/about'],
-    ls: ['bio.txt', 'skills.txt', 'projects/', 'certificates/'],
+    ls: ['bio.txt', 'skills.txt', 'projects/', 'blogs/'],
   }), [])
 
   function pushEntries(entries: ShellEntry[]) {

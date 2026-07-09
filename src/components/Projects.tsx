@@ -52,7 +52,7 @@ function ProjectCard({ project }: { project: Project }) {
         </div>
 
         <h3 className="font-display text-[1.35rem] mb-2 leading-[1.05]" style={{ color: '#ebeee0' }}>{project.title}</h3>
-        <p className="text-[0.82rem] italic mb-4" style={{ color: '#ff6b00' }}>{project.description}</p>
+        <p className="text-[0.88rem] leading-[1.6] mb-4" style={{ color: 'rgba(235,238,224,0.75)' }}>{project.description}</p>
 
         <ul className="space-y-2 mb-5">
           {project.points.map((point, i) => (

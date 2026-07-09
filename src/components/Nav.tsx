@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion'
 import { navigateToPage, usePageRoute, type PageId } from '../hooks/usePageRoute'
 
-const NAV_ITEMS: PageId[] = ['about', 'skills', 'projects', 'blogs', 'education', 'certificates', 'contact']
+const NAV_ITEMS: PageId[] = ['about', 'skills', 'projects', 'blogs', 'contact']
 
 /** Pages whose top section has a dark background — nav text flips to light. */
-const DARK_PAGES: PageId[] = ['about', 'projects', 'certificates']
+const DARK_PAGES: PageId[] = ['about', 'projects']
 
 export default function Nav() {
   const [scrolled, setScrolled]     = useState(false)

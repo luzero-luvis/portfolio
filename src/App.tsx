@@ -7,8 +7,6 @@ import Skills       from './components/Skills'
 import Projects     from './components/Projects'
 import Blogs        from './components/Blogs'
 import BlogPostPage from './components/BlogPostPage'
-import Education    from './components/Education'
-import Certificates from './components/Certificates'
 import SoftSkills   from './components/SoftSkills'
 import Contact      from './components/Contact'
 import Footer       from './components/Footer'
@@ -22,8 +20,6 @@ const PAGE_TITLES: Record<string, string> = {
   skills:       'Skills — Luvis Joston J',
   projects:     'Projects — Luvis Joston J',
   blogs:        'Blog — Luvis Joston J',
-  education:    'Education — Luvis Joston J',
-  certificates: 'Certificates — Luvis Joston J',
   contact:      'Contact — Luvis Joston J',
 }
 
@@ -74,8 +70,6 @@ export default function App() {
     skills: <Skills />,
     projects: <Projects />,
     blogs: blogSlug ? <BlogPostPage slug={blogSlug} /> : <Blogs />,
-    education: <Education />,
-    certificates: <Certificates />,
     contact: <Contact />,
   }[page]
 

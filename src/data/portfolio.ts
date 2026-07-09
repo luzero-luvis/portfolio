@@ -1,8 +1,8 @@
-import type { SkillCategory, Project, Education, Certificate, Stat, Theme, ThemeColors } from '../types'
+import type { SkillCategory, Project, Stat, Theme, ThemeColors } from '../types'
 
 export const profile = {
   name: 'Luvis Joston J',
-  roles: ['DevOps Engineer', 'GitOps Practitioner', 'Cloud Architect', 'Kubernetes Engineer', 'Go Developer'],
+  roles: ['DevOps Engineer', 'GitOps Practitioner', 'Kubernetes Engineer', 'Go Developer'],
   bio: 'DevOps Engineer working with cloud infrastructure, GitOps pipelines, CI/CD, and observability tooling on AWS, GCP & Hetzner.',
   location: 'Bengaluru, India',
   email: 'luvisjoston@gmail.com',
@@ -124,56 +124,21 @@ export const projects: Project[] = [
   },
 ]
 
-export const education: Education[] = [
-  {
-    years: '2021 — 2024',
-    school: 'Govt Home Science College, Hassan',
-    detail: 'Bachelor of Computer Applications (BCA) · University of Mysore',
-    score: 'CGPA: 8.5',
-  },
-  {
-    years: '2019 — 2021',
-    school: "St Joseph's PU College, Hassan",
-    detail: 'Pre-University Course (PUC)',
-    score: '77%',
-  },
-  {
-    years: '2016 — 2019',
-    school: "St Francis Xavier's High School, Hassan",
-    detail: 'Secondary School Education (SSLC)',
-    score: '89%',
-  },
-]
-
-export const certificates: Certificate[] = [
-  {
-    issuer: 'StarAgile',
-    name: 'DevOps Engineer Certificate',
-    logo: '🛡️',
-    logoBg: 'rgba(0,200,150,0.1)',
-    links: [
-      { label: 'View Certificate', url: 'https://github.com/luvis-joston-j/devops-certificate/blob/main/devops.png' },
-    ],
-  },
-  {
-    issuer: 'IBM',
-    name: 'Docker, Kubernetes & DevOps Badges',
-    logo: '🏅',
-    logoBg: 'rgba(56,189,248,0.1)',
-    links: [
-      { label: 'Docker Certificate',    url: 'https://github.com/luvis-joston-j/devops-certificate/blob/main/DOCKER%20IBM%20CIRTIFICATE.pdf' },
-      { label: 'Kubernetes Certificate', url: 'https://github.com/luvis-joston-j/devops-certificate/blob/main/KUBERNETES%20IBM%20CIRTIFICATE.pdf' },
-      { label: 'DevOps Certificate',    url: 'https://github.com/luvis-joston-j/devops-certificate/blob/main/DEVOPS%20IBM%20CIRTIFICATE.pdf' },
-      { label: 'Docker Essentials Badge', url: 'https://github.com/luvis-joston-j/devops-certificate/blob/main/docker-essentials-a-developerintroduction.png' },
-    ],
-  },
-]
-
 export const softSkills = [
-  { icon: '🗣️', label: 'Communication' },
-  { icon: '⏱️', label: 'Time Management' },
-  { icon: '💡', label: 'Creativity' },
-  { icon: '🤝', label: 'Collaboration' },
-  { icon: '💪', label: 'Work Ethic' },
-  { icon: '🔄', label: 'Adaptability' },
+  {
+    label: 'Communication',
+    blurb: 'Clear write-ups — design notes, PR descriptions, and incident summaries people can actually follow.',
+  },
+  {
+    label: 'Collaboration',
+    blurb: 'Comfortable working across dev, QA, and ops. Automation is a team sport.',
+  },
+  {
+    label: 'Adaptability',
+    blurb: 'New tools and shifting requirements are the job, not an interruption.',
+  },
+  {
+    label: 'Ownership',
+    blurb: 'If I ship it, I run it — monitoring, alerts, and follow-through included.',
+  },
 ]
