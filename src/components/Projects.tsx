@@ -3,16 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { fadeUp, stagger, viewport } from '../utils/animations'
 import { projects } from '../data/portfolio'
 import type { Project, BadgeTheme } from '../types'
-import TerminalHeader from './TerminalHeader'
+import SectionHeader from './SectionHeader'
 
-const CYBER_BADGE: Record<BadgeTheme, { bg: string; text: string; border: string }> = {
-  green:  { bg: 'rgba(0,255,65,0.1)',    text: '#00FF41', border: 'rgba(0,255,65,0.3)' },
-  blue:   { bg: 'rgba(0,217,255,0.1)',   text: '#00D9FF', border: 'rgba(0,217,255,0.3)' },
-  purple: { bg: 'rgba(192,132,252,0.1)', text: '#C084FC', border: 'rgba(192,132,252,0.3)' },
-  orange: { bg: 'rgba(255,107,53,0.1)',  text: '#FF6B35', border: 'rgba(255,107,53,0.3)' },
-}
-
-// Map badgeTheme to filter category
 const BADGE_TO_FILTER: Record<BadgeTheme, string> = {
   green:  'CI/CD',
   blue:   'Kubernetes',
@@ -29,29 +21,21 @@ const GH_ICON = (
 )
 
 function ProjectCard({ project }: { project: Project }) {
-  const badge = CYBER_BADGE[project.badgeTheme]
   return (
     <motion.div
       layout
       variants={fadeUp}
       initial="hidden"
       animate="visible"
-      exit={{ opacity: 0, scale: 0.95 }}
-      whileHover={{ y: -6, boxShadow: `0 0 30px ${project.accentColor}25`, borderColor: `${project.accentColor}50` }}
-      className="glass shadow-soft rounded-2xl overflow-hidden transition-all duration-300"
-      style={{ border: '1px solid rgba(30,39,46,0.9)', display: 'grid', gridTemplateColumns: '3px 1fr' }}
+      exit={{ opacity: 0, scale: 0.96 }}
+      whileHover={{ y: -6 }}
+      className="card-dark overflow-hidden"
     >
-      {/* Accent left bar */}
-      <div style={{ background: project.accentColor, boxShadow: `0 0 12px ${project.accentColor}60` }} />
       <div className="p-7">
-        {/* Top row */}
-        <div className="flex items-start justify-between gap-4 mb-3 flex-wrap">
-          <div className="flex items-center gap-3">
-            <span className="font-mono text-[0.72rem] font-semibold" style={{ color: '#5A6873' }}>{project.number}</span>
-            <span
-              className="font-mono text-[0.68rem] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wide"
-              style={{ background: badge.bg, color: badge.text, border: `1px solid ${badge.border}` }}
-            >
+        <div className="flex items-start justify-between gap-4 mb-4 flex-wrap">
+          <div className="flex items-baseline gap-4">
+            <span className="font-display" style={{ fontSize: '2.4rem', color: 'rgba(255,255,255,0.18)', lineHeight: 1 }}>{project.number}</span>
+            <span className="text-[0.68rem] font-bold px-3 py-1 rounded-sm uppercase tracking-wider" style={{ background: '#4398cd', color: '#e8e8e6' }}>
               {project.badge}
             </span>
           </div>
@@ -59,23 +43,21 @@ function ProjectCard({ project }: { project: Project }) {
             href={project.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ borderColor: '#00FF41', color: '#00FF41' }}
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg font-mono text-[0.76rem] transition-all shrink-0"
-            style={{ background: '#0A0E11', border: '1px solid rgba(0,255,65,0.15)', color: '#7A8894' }}
+            whileHover={{ y: -2 }}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-sm text-[0.76rem] font-semibold transition-all shrink-0"
+            style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.16)', color: '#f4f4f2' }}
           >
-            {GH_ICON} View on GitHub
+            {GH_ICON} GitHub
           </motion.a>
         </div>
 
-        <h3 className="font-bold text-[1.05rem] mb-2 leading-[1.35]" style={{ color: '#C5CDD3' }}>
-          {project.title}
-        </h3>
-        <p className="font-mono text-[0.82rem] italic mb-4" style={{ color: '#5A6873' }}>{project.description}</p>
+        <h3 className="font-display text-[1.35rem] mb-2 leading-[1.05]" style={{ color: '#f4f4f2' }}>{project.title}</h3>
+        <p className="text-[0.82rem] italic mb-4" style={{ color: '#d82d17' }}>{project.description}</p>
 
         <ul className="space-y-2 mb-5">
           {project.points.map((point, i) => (
-            <li key={i} className="flex gap-2 text-[0.84rem] leading-[1.5]" style={{ color: '#7A8894' }}>
-              <span className="shrink-0 mt-[2px]" style={{ color: '#00FF41' }}>▸</span>
+            <li key={i} className="flex gap-2.5 text-[0.86rem] leading-[1.5]" style={{ color: '#8a8a86' }}>
+              <span className="shrink-0 mt-[3px]" style={{ color: '#4398cd' }}>▸</span>
               {point}
             </li>
           ))}
@@ -83,11 +65,7 @@ function ProjectCard({ project }: { project: Project }) {
 
         <div className="flex flex-wrap gap-1.5">
           {project.tags.map(tag => (
-            <span
-              key={tag}
-              className="font-mono text-[0.7rem] px-2 py-1 rounded-md"
-              style={{ background: '#0A0E11', border: '1px solid rgba(0,255,65,0.1)', color: '#5A6873' }}
-            >
+            <span key={tag} className="text-[0.7rem] font-medium px-2.5 py-1 rounded-sm" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#8a8a86' }}>
               {tag}
             </span>
           ))}
@@ -105,60 +83,31 @@ export default function Projects() {
     : projects.filter(p => BADGE_TO_FILTER[p.badgeTheme] === active)
 
   return (
-    <section id="projects" className="py-24 px-6" style={{ background: '#0A0E11' }}>
-      <div className="max-w-[1100px] mx-auto">
-        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewport}>
-          <TerminalHeader
-            command="docker ps -a"
-            subtitle="Real-world DevOps projects spanning CI/CD, GitOps, cloud infrastructure, and application development"
-          />
-        </motion.div>
+    <section id="projects" className="py-28 px-6" style={{ background: 'transparent' }}>
+      <div className="max-w-[1200px] mx-auto">
+        <SectionHeader
+          dark
+          kicker="Work"
+          title="What I've built"
+          subtitle="Real-world DevOps projects spanning CI/CD, GitOps, cloud infrastructure, and backend services."
+        />
 
-        {/* Section title */}
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
-          className="text-center mb-8"
-        >
-          <h2 className="font-extrabold mb-3" style={{ fontSize: 'clamp(1.6rem, 4vw, 2.2rem)', color: '#C5CDD3', fontFamily: "'JetBrains Mono', monospace" }}>
-            What I've Built
-          </h2>
-        </motion.div>
-
-        {/* Filter buttons */}
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
-          className="flex flex-wrap gap-2 mb-8"
-        >
+        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewport} className="flex flex-wrap gap-2 mb-8">
           {FILTERS.map(f => (
             <button
               key={f}
               onClick={() => setActive(f)}
-              className="px-4 py-2 rounded-lg font-mono text-[0.82rem] font-semibold transition-all duration-200"
-              style={
-                active === f
-                  ? { background: '#00FF41', color: '#000000', border: '1px solid #00FF41' }
-                  : { background: 'transparent', color: '#7A8894', border: '1px solid rgba(0,255,65,0.2)' }
-              }
+              className="px-5 py-2 rounded-sm text-[0.82rem] font-bold uppercase tracking-wide transition-all duration-200"
+              style={active === f
+                ? { background: '#4398cd', color: '#e8e8e6' }
+                : { background: 'transparent', color: '#8a8a86', border: '1px solid rgba(255,255,255,0.2)' }}
             >
               {f}
             </button>
           ))}
         </motion.div>
 
-        <motion.div
-          layout
-          variants={stagger}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
-          className="grid md:grid-cols-2 gap-5"
-        >
+        <motion.div layout variants={stagger} initial="hidden" whileInView="visible" viewport={viewport} className="grid md:grid-cols-2 gap-5">
           <AnimatePresence mode="popLayout">
             {filtered.map(p => <ProjectCard key={p.number} project={p} />)}
           </AnimatePresence>
