@@ -1,79 +1,28 @@
-import { motion } from 'framer-motion'
-import { useTypewriter } from '../hooks/useTypewriter'
 import { profile } from '../data/portfolio'
-import { stagger, fadeUp } from '../utils/animations'
-import { navigateToPage } from '../hooks/usePageRoute'
-import Marquee from './Marquee'
+import Architecture from './Architecture'
+import SiteLink from './SiteLink'
+import Projects from './Projects'
+import Skills from './Skills'
+import Blogs from './Blogs'
+import Contact from './Contact'
 
-const TECH = ['AWS', 'GCP', 'HETZNER', 'KUBERNETES', 'TERRAFORM', 'GITOPS', 'DOCKER', 'PROMETHEUS', 'GO', 'JENKINS', 'GRAFANA', 'FLUXCD']
+const technologies = [['aws', 'AWS'], ['kubernetes', 'Kubernetes'], ['terraform', 'Terraform'], ['go', 'Go'], ['docker', 'Docker'], ['prometheus', 'Prometheus']]
 
 export default function Hero() {
-  const text = useTypewriter(profile.roles)
-
-  return (
-    <section
-      id="hero"
-      className="relative min-h-screen flex flex-col justify-center overflow-hidden"
-      style={{ paddingTop: '96px', background: '#ebeee0' }}
-    >
-      <div className="max-w-[1200px] mx-auto w-full px-6 flex-1 flex flex-col justify-center py-16">
-        <motion.div variants={stagger} initial="hidden" animate="visible" className="w-full">
-
-          <motion.span variants={fadeUp} className="kicker mb-6">
-            DevOps Engineer · {profile.location}
-          </motion.span>
-
-          {/* Giant name */}
-          <motion.h1
-            variants={fadeUp}
-            className="font-display"
-            style={{ fontSize: 'clamp(3.2rem, 13vw, 11rem)', color: '#111112' }}
-          >
-            Luvis<br />
-            <span style={{ color: '#111112' }}>Joston J</span>
-          </motion.h1>
-
-          {/* Typewriter role */}
-          <motion.div
-            variants={fadeUp}
-            className="font-display mt-4"
-            style={{ fontSize: 'clamp(1.4rem, 4vw, 2.6rem)', color: '#ff6b00' }}
-          >
-            {text}
-            <span className="animate-blink inline-block ml-1" style={{ color: '#d2ff00' }}>_</span>
-          </motion.div>
-
-          {/* Bio */}
-          <motion.p
-            variants={fadeUp}
-            className="max-w-[560px] mt-8 text-[1.05rem] leading-[1.7]"
-            style={{ color: '#535450' }}
-          >
-            {profile.bio}
-          </motion.p>
-
-          {/* CTAs */}
-          <motion.div variants={fadeUp} className="flex gap-4 flex-wrap mt-10">
-            <button onClick={() => navigateToPage('projects')} className="pill">
-              View Projects →
-            </button>
-            <button onClick={() => navigateToPage('contact')} className="pill-ghost">
-              Get in touch
-            </button>
-          </motion.div>
-
-          {/* Availability */}
-          <motion.div variants={fadeUp} className="inline-flex items-center gap-2.5 mt-10 text-[0.85rem] font-semibold" style={{ color: '#535450' }}>
-            <span className="w-2.5 h-2.5 rounded-full animate-pulse-dot" style={{ background: '#d2ff00' }} />
-            Available — open to DevOps opportunities
-          </motion.div>
-        </motion.div>
+  return <>
+    <section className="hero container" aria-labelledby="hero-title">
+      <div className="hero-copy">
+        <div className="eyebrow"><span className="status-dot" />DEVOPS & CLOUD ENGINEERING</div>
+        <h1 id="hero-title">Luvis<br /><span className="heading-accent">Joston J.</span></h1>
+        <p className="hero-role">Cloud infrastructure. Code to production.</p>
+        <p className="hero-description">I build cloud infrastructure, automate delivery, and make complex systems easier to understand.</p>
+        <div className="button-row"><SiteLink className="button button-dark" href="/projects">Explore my work <span aria-hidden="true">↗</span></SiteLink><a className="text-link" href={profile.github2.url} target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a></div>
+        <div className="hero-location"><span aria-hidden="true">◎</span> {profile.location}<span className="divider">/</span> Building. Breaking. Learning.</div>
       </div>
-
-      {/* Running tech band */}
-      <div className="border-y" style={{ borderColor: '#111112' }}>
-        <Marquee items={TECH} variant="lime" />
-      </div>
+      <Architecture />
+      <div className="hero-footnote"><span>FROM THE FIRST COMMIT TO THE RUNNING CLUSTER.</span><a href="#selected-work">SCROLL TO EXPLORE <span aria-hidden="true">↓</span></a></div>
     </section>
-  )
+    <div className="tech-strip"><div className="container tech-inner"><span className="mono-label">TOOLS OF THE TRADE</span><div className="tech-list">{technologies.map(([icon, label]) => <span key={icon}><img src={icon === 'aws' ? '/aws-logo.svg' : '/icons/' + icon + '.svg'} width="23" height="23" alt="" />{label}</span>)}</div></div></div>
+    <Projects featured /><Skills preview /><Blogs preview /><Contact compact />
+  </>
 }

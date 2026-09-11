@@ -1,74 +1,8 @@
-import { motion } from 'framer-motion'
-import { fadeUp, stagger, viewport } from '../utils/animations'
-import { stats } from '../data/portfolio'
-import SectionHeader from './SectionHeader'
-import ProfileShell from './ProfileShell'
-
-const specializations = [
-  'Cloud Architecture',
-  'CI/CD Pipelines',
-  'GitOps',
-  'K8s Orchestration',
-  'Infrastructure as Code',
-  'Full Observability',
-  'Go Development',
-  'Container Security',
-]
+import { profile } from '../data/portfolio'
+import Skills from './Skills'
+import Contact from './Contact'
+import SiteLink from './SiteLink'
 
 export default function About() {
-  return (
-    <section id="about" className="py-28 px-6" style={{ background: '#282c20' }}>
-      <div className="max-w-[1200px] mx-auto">
-        <SectionHeader
-          dark
-          kicker="About"
-          title="Turning infrastructure into production reality"
-          subtitle="I design, automate, and deploy systems that carry code to production on AWS, GCP, and Hetzner — GitOps pipelines, Kubernetes platforms, and observability stacks built to be reliable and repeatable."
-        />
-
-        <div className="grid lg:grid-cols-[1fr_360px] gap-8 items-start">
-
-          {/* Interactive shell */}
-          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewport}>
-            <ProfileShell />
-          </motion.div>
-
-          {/* Stats + specializations */}
-          <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={viewport} className="flex flex-col gap-5">
-            <motion.div variants={fadeUp} className="card-dark p-6">
-              <h3 className="text-[0.72rem] font-bold uppercase tracking-[0.22em] mb-5" style={{ color: '#d2ff00' }}>Quick Stats</h3>
-              <div className="space-y-3.5">
-                {[
-                  { label: 'Experience',      value: '1+ years' },
-                  { label: 'Cloud Platforms', value: 'AWS, GCP, Hetzner' },
-                  { label: 'Projects',        value: `${stats.find(s => s.label === 'Projects Built')?.number ?? '5+'} deployed` },
-                  { label: 'Technologies',    value: `${stats.find(s => s.label === 'Tools Used')?.number ?? '25+'} used` },
-                ].map(row => (
-                  <div key={row.label} className="flex justify-between items-center">
-                    <span className="text-[0.88rem]" style={{ color: '#b4b8a5' }}>{row.label}</span>
-                    <span className="text-[0.88rem] font-bold" style={{ color: '#ebeee0' }}>{row.value}</span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.div variants={fadeUp} className="card-dark p-6">
-              <h3 className="text-[0.72rem] font-bold uppercase tracking-[0.22em] mb-5" style={{ color: '#d2ff00' }}>Specializations</h3>
-              <div className="flex flex-wrap gap-2">
-                {specializations.map(s => (
-                  <span
-                    key={s}
-                    className="text-[0.76rem] font-medium px-3 py-1.5 rounded-full"
-                    style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', color: '#ebeee0' }}
-                  >
-                    {s}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  )
+  return <><section className="container section about-section"><div className="eyebrow">THE ENGINEER BEHIND THE REPOS</div><div className="about-grid"><div><h1>Curiosity is<br />part of the<br /><span className="heading-accent">toolchain.</span></h1><div className="about-signature">Luvis Joston J<span>DevOps & Cloud Engineering / {profile.location}</span></div></div><div className="about-copy"><p className="lead">I like knowing what happens after the code ships.</p><p>How does traffic reach the workload? What happens when a node disappears? Can the cluster be rebuilt from Git? Those are the questions behind my work.</p><p>I’m a DevOps engineer based in Bengaluru, working with cloud infrastructure, Kubernetes, GitOps, and Go. I contribute to the WindVista platform on Hetzner, including workload resource tuning, monitoring, and operational documentation.</p><p>My personal projects range from focused networking labs to an SRE application that connects live diagnostics with human approval. I learn by writing the configuration, following the request path, breaking things in a lab, and documenting what happened.</p><SiteLink className="button button-dark" href="/projects">Take a look at my work ↗</SiteLink></div></div><div className="principles"><div><span>01 / MAKE IT REPEATABLE</span><h2>If it matters, put it in code.</h2></div><div><span>02 / MAKE IT UNDERSTANDABLE</span><h2>Document the why, too.</h2></div><div><span>03 / KEEP ASKING QUESTIONS</span><h2>There’s always another layer.</h2></div></div></section><Skills preview /><Contact compact /></>
 }

@@ -1,121 +1,13 @@
-import { useMemo, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { useState } from 'react'
 import { blogPosts } from '../data/blogPosts'
-import { fadeUp, stagger, viewport } from '../utils/animations'
-import type { BlogPost } from '../types'
-import SectionHeader from './SectionHeader'
-import { navigateToBlogPost } from '../hooks/usePageRoute'
+import SiteLink from './SiteLink'
 
-const GH_ICON = (
-  <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24">
-    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.73.083-.73 1.205.085 1.838 1.236 1.838 1.236 1.07 1.835 2.807 1.305 3.492.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.298 24 12c0-6.63-5.37-12-12-12z" />
-  </svg>
-)
-
-const ARROW_ICON = (
-  <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-    <path d="M5 12h14M13 5l7 7-7 7" />
-  </svg>
-)
-
-function BlogCard({ post }: { post: BlogPost }) {
-  const open = () => navigateToBlogPost(post.slug)
-  return (
-    <motion.article
-      layout
-      variants={fadeUp}
-      initial="hidden"
-      animate="visible"
-      exit={{ opacity: 0, scale: 0.97 }}
-      whileHover={{ y: -5 }}
-      className="card overflow-hidden cursor-pointer"
-      onClick={open}
-    >
-      <div className="p-7">
-        <div className="flex items-start justify-between gap-4 mb-4 flex-wrap">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-[0.68rem] font-bold px-3 py-1 rounded-full uppercase tracking-wider" style={{ background: '#282c20', color: '#ebeee0' }}>
-              {post.category}
-            </span>
-            <span className="text-[0.72rem] font-medium" style={{ color: '#535450' }}>{post.repo}</span>
-            <span className="text-[0.72rem] font-medium" style={{ color: '#535450' }}>{post.readTime}</span>
-          </div>
-          <a
-            href={post.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={e => e.stopPropagation()}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[0.76rem] font-semibold transition-all shrink-0"
-            style={{ background: '#ebeee0', border: '1px solid #dde1d2', color: '#282c20' }}
-          >
-            {GH_ICON} Repo
-          </a>
-        </div>
-
-        <h3 className="font-display text-[1.5rem] leading-[1.05] mb-3" style={{ color: '#111112' }}>{post.title}</h3>
-        <p className="text-[0.95rem] leading-[1.7] mb-5" style={{ color: '#535450' }}>{post.summary}</p>
-
-        <div className="flex flex-wrap gap-1.5 mb-6">
-          {post.stack.slice(0, 5).map(item => (
-            <span key={item} className="text-[0.7rem] font-medium px-2.5 py-1 rounded-full" style={{ background: '#ebeee0', border: '1px solid #dde1d2', color: '#535450' }}>
-              {item}
-            </span>
-          ))}
-        </div>
-
-        <span
-          className="inline-flex items-center gap-2 text-[0.8rem] font-bold uppercase tracking-wide"
-          style={{ color: '#111112' }}
-        >
-          Read article {ARROW_ICON}
-        </span>
-      </div>
-    </motion.article>
-  )
-}
-
-export default function Blogs() {
-  const [activeCategory, setActiveCategory] = useState('All')
-
-  const categories = useMemo(
-    () => ['All', ...Array.from(new Set(blogPosts.map(post => post.category)))],
-    [],
-  )
-
-  const visiblePosts = activeCategory === 'All'
-    ? blogPosts
-    : blogPosts.filter(post => post.category === activeCategory)
-
-  return (
-    <section id="blogs" className="py-28 px-6" style={{ background: '#ebeee0' }}>
-      <div className="max-w-[1200px] mx-auto">
-        <SectionHeader
-          kicker="Repo notes"
-          title="Build notes"
-          subtitle="Long-form writing based on the repositories behind this portfolio — what was built, why the design choices matter, and what each project taught me. Each post opens on its own page."
-        />
-
-        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewport} className="flex flex-wrap gap-2 mb-8">
-          {categories.map(category => (
-            <button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              className="px-5 py-2 rounded-full text-[0.82rem] font-bold uppercase tracking-wide transition-all duration-200"
-              style={activeCategory === category
-                ? { background: '#111112', color: '#ebeee0' }
-                : { background: 'transparent', color: '#535450', border: '1px solid #c8cbbd' }}
-            >
-              {category}
-            </button>
-          ))}
-        </motion.div>
-
-        <motion.div layout variants={stagger} initial="hidden" whileInView="visible" viewport={viewport} className="grid sm:grid-cols-2 gap-5">
-          <AnimatePresence mode="popLayout">
-            {visiblePosts.map(post => <BlogCard key={post.slug} post={post} />)}
-          </AnimatePresence>
-        </motion.div>
-      </div>
-    </section>
-  )
+export default function Blogs({ preview = false }: { preview?: boolean }) {
+  const [category, setCategory] = useState('All')
+  const posts = preview ? blogPosts.slice(0, 3) : blogPosts.filter(post => category === 'All' || post.category === category)
+  const Heading = preview ? 'h2' : 'h1'
+  return <section className="container section notes-section"><div className="section-heading"><div><div className="eyebrow">03 / FIELD NOTES</div><Heading>Things I built.<br /><span className="heading-accent">Things I figured out.</span></Heading></div><div className="section-aside"><p>Notes from the terminal, the docs,<br />and the occasional wrong turn.</p>{preview ? <SiteLink className="text-link" href="/blogs">All notes ↗</SiteLink> : <a className="text-link" href="https://github.com/luzero-luvis/til" target="_blank" rel="noreferrer">Architecture reading notebook ↗</a>}</div></div>
+    {!preview && <div className="filter-list notes-filters" role="group" aria-label="Filter notes">{['All', ...new Set(blogPosts.map(post => post.category))].map(item => <button key={item} type="button" aria-pressed={category === item} onClick={() => setCategory(item)}>{item}</button>)}</div>}
+    <div className="notes-list">{posts.map((post, index) => <article key={post.slug}><span className="note-number">{String(index + 1).padStart(2, '0')}</span><div><div className="note-meta">{post.category}<span> / </span>{post.readTime}</div><h3><SiteLink href={'/blogs/' + post.slug}>{post.title}</SiteLink></h3>{!preview && <p>{post.summary}</p>}</div><SiteLink className="note-arrow" href={'/blogs/' + post.slug} aria-label={'Read ' + post.title}>↗</SiteLink></article>)}</div>
+  </section>
 }
