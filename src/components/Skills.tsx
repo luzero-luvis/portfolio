@@ -7,14 +7,14 @@ const categoryIcons = ['AWS', 'Kubernetes', 'GitHub Actions', 'Grafana', 'Git', 
 export default function Skills({ preview = false }: { preview?: boolean }) {
   const Heading = preview ? 'h2' : 'h1'
   return (
-    <section className="expertise-section section">
+    <section className="expertise-section section" aria-labelledby="expertise-title">
       <div className="container">
         <div className="section-heading">
           <div>
-            <div className="eyebrow">02 / HOW I WORK</div>
-            <Heading>The whole system.<br /><span className="heading-accent">Beyond the deploy.</span></Heading>
+            <div className="eyebrow">MY TOOLKIT</div>
+            <Heading id="expertise-title">The tools behind the work.</Heading>
           </div>
-          <p className="section-aside">I connect infrastructure, delivery, and observability — and write down what I learn along the way.</p>
+          <p className="section-aside">The three areas most of my work falls into. Each links to a repository that shows it.</p>
         </div>
         <div className="capability-grid">
           {capabilities.map(item => (
@@ -23,13 +23,13 @@ export default function Skills({ preview = false }: { preview?: boolean }) {
               <h3>{item.title}</h3>
               <p>{item.description}</p>
               <div className="tags">{item.tools.map(tool => <span key={tool}>{tool}</span>)}</div>
-              <a className="text-link" href={'https://github.com/' + item.repo} target="_blank" rel="noreferrer">See it in the code ↗</a>
+              <a className="text-link" href={'https://github.com/' + item.repo} target="_blank" rel="noreferrer">View repository ↗</a>
             </article>
           ))}
         </div>
         <div className="skills-toolkit">
-          <div className="eyebrow">THE TOOLKIT</div>
-          <h2>Tools I work with<span className="wordmark-dot">.</span></h2>
+          <div className="eyebrow">TOOLS</div>
+          <h2>Day-to-day toolkit.</h2>
           <div className="skills-grid">
             {skillCategories.map((category, index) => (
               <article className="skill-category" key={category.name}>

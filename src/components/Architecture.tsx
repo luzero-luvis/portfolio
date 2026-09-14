@@ -12,7 +12,7 @@ export default function Architecture({ compact = false, variant = 0 }: { compact
   const gridId = 'grid-' + (compact ? variant : 'hero')
   return (
     <div className={'architecture ' + (compact ? 'architecture-compact' : '')}>
-      <div className="architecture-top"><span>{compact ? ['HETZNER / GITOPS PLATFORM', 'SRE / INVESTIGATION FLOW', 'AWS / PLATFORM FOUNDATION'][variant] : 'A SYSTEMS MINDSET'}</span><span aria-hidden="true">↗</span></div>
+      <div className="architecture-top"><span>{compact ? ['HETZNER / GITOPS PLATFORM', 'OBSERVABILITY / DIAGNOSTICS', 'AWS / PLATFORM FOUNDATION'][variant] : 'A SYSTEMS MINDSET'}</span><span aria-hidden="true">↗</span></div>
       <svg className="architecture-drawing" viewBox="0 0 480 350" role="img" aria-label={compact ? ['A layered GitOps platform from configuration to cluster', 'An investigation workflow with a human approval boundary', 'A cloud platform built from the network up'][variant] : stage.layers.join(', then ')}>
         <defs><pattern id={gridId} width="32" height="18" patternUnits="userSpaceOnUse" patternTransform="matrix(1 .5 -1 .5 240 10)"><path d="M 32 0 L 0 0 0 18" fill="none" stroke="#526580" strokeWidth=".6" /></pattern></defs>
         <rect width="480" height="350" fill={'url(#' + gridId + ')'} opacity=".35" />

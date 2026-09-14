@@ -83,7 +83,7 @@ export const projects: Project[] = [
     description: 'FluxCD · AWS EKS · Terraform · Istio · Longhorn · Vault · Prometheus · Loki',
     points: [
       'FluxCD Kustomizations manage cluster, infra, configs, monitoring, and app layers via GitOps.',
-      'Istio service mesh with Gateway API; cert-manager for Let\'s Encrypt wildcard TLS on sirpify.com.',
+      'Istio service mesh with Gateway API; cert-manager for Let\'s Encrypt wildcard TLS.',
       'External Secrets pulls from HashiCorp Vault; Velero backs up to S3; Longhorn for persistent storage.',
       'Full observability: kube-prometheus-stack, Loki log aggregation, and Grafana Alloy log pipeline.',
     ],

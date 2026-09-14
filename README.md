@@ -23,12 +23,14 @@ The homepage introduces the engineer, shows three selected case studies, and lin
 
 Featured routes:
 - `/projects/hetzner-gitops-platform`
-- `/projects/kubernetes-sre-platform`
+- `/projects/aws-gitops-platform`
 - `/projects/aws-eks-foundation`
 
 ## Design and accessibility
 
-The visual system defaults to bright, friendly surfaces with electric-blue, teal, coral, and colorful technology logos. A header toggle switches to a dark graphite mode and persists the choice in local storage. Architecture illustrations are lightweight local SVG elements. The Build / Ship / Observe control explains the engineering workflow; it is illustrative, not a live cluster dashboard.
+The visual system uses a green accent, colorful typographic name treatment, and bright reading surfaces, inspired by [Mahendra’s portfolio](https://mhndra.com/). A header toggle switches between light and dark themes and persists the choice in local storage. The homepage identifies Luvis as a DevOps Engineer without naming an employer.
+
+The blog has topic filters, text search, article previews, and reading times calculated from the article content at 265 words per minute, following [Medium’s reading-time method](https://help.medium.com/hc/en-us/articles/214991667-Read-time). Article pages use a narrow serif reading column, a contents menu, a larger-text toggle, related articles, and a copy-link button. All content is readable without a login.
 
 Navigation uses real links, the mobile menu exposes its expanded state and supports Escape, and the site includes visible keyboard focus, a skip link, reduced-motion support, semantic headings, and clipboard feedback with a failure fallback.
 

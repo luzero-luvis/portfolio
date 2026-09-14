@@ -5,9 +5,16 @@ export interface Work {
   title: string
   category: WorkCategory
   summary: string
+  preview: {
+    title: string
+    description: string
+    contribution: string
+    steps: { label: string; icon: string }[]
+  }
   stack: string[]
   repo?: string
   kind: string
+  layers: string[]
   role: string
   problem: string
   decisions: string[]
@@ -18,11 +25,18 @@ export interface Work {
 export const featuredWork: Work[] = [
   {
     slug: 'hetzner-gitops-platform',
-    title: 'Keeping a multi-environment platform in sync.',
+    title: 'WindVista platform on Hetzner',
+    preview: {
+      title: 'WindVista on Hetzner',
+      description: 'A shared Kubernetes platform with GitOps delivery across development and beta environments.',
+      contribution: 'Workload tuning, monitoring fixes, and operational runbooks.',
+      steps: [{ label: 'Git', icon: 'Git' }, { label: 'Kubernetes', icon: 'Kubernetes' }, { label: 'Hetzner', icon: 'Hetzner' }],
+    },
     category: 'Platform',
     summary: 'Contributing to the WindVista platform on Hetzner: Flux delivery, workload tuning, and observability across development and beta.',
     stack: ['Hetzner', 'FluxCD', 'Kubernetes', 'Grafana'],
     kind: 'Team project · WindVista',
+    layers: ['Workloads · KEDA autoscaling', 'Flux delivery · dev + beta', 'Hetzner nodes · Cilium · Longhorn'],
     role: 'Platform contributor. My contributions include memory tuning, monitoring fixes, scaling configuration, and operational documentation within a shared team repository.',
     problem: 'A shared Kubernetes platform needs repeatable deployments, environment-specific configuration, and monitoring that helps distinguish a current issue from stale signals.',
     decisions: [
@@ -35,32 +49,46 @@ export const featuredWork: Work[] = [
     next: 'Continue validating resource changes against workload behavior and rehearsing recovery. The repository uses prune: false in key Flux layers, so removing a manifest also requires deliberate resource cleanup. Rook Ceph configuration exists but is documented as not currently serving either cluster.',
   },
   {
-    slug: 'kubernetes-sre-platform',
-    title: 'An SRE copilot. With a human in control.',
+    slug: 'aws-gitops-platform',
+    title: 'Production GitOps platform on AWS',
+    preview: {
+      title: 'AWS GitOps platform',
+      description: 'Cluster services, applications, and observability brought together in a versioned GitOps workflow.',
+      contribution: 'Platform configuration, delivery layers, and service integration.',
+      steps: [{ label: 'Git', icon: 'Git' }, { label: 'Kubernetes', icon: 'Kubernetes' }, { label: 'AWS EKS', icon: 'AWS' }],
+    },
     category: 'Platform',
-    summary: 'From a cluster question to live diagnostics and an approved fix. A Kubernetes investigation workflow built with Go and React.',
-    stack: ['Go', 'Kubernetes', 'Prometheus', 'React'],
-    repo: 'luzero-luvis/k8s-sre-agent',
-    kind: 'Application · in development',
-    role: 'Application development across the Go backend, diagnostic workflow, and React interface.',
-    problem: 'Investigating Kubernetes incidents means moving between metrics, logs, and cluster state. An assistant can connect that evidence, but changes to a cluster need a deliberate approval boundary.',
+    summary: 'A production-style EKS platform where Git commits reconcile cluster services, applications, secrets, storage, and observability.',
+    stack: ['AWS EKS', 'FluxCD', 'Terraform', 'Istio'],
+    repo: 'luzero-luvis/aws-fluxcd',
+    kind: 'Personal project · GitOps',
+    layers: ['Applications · Kustomize overlays', 'Flux reconciliation · ordered layers', 'EKS · Istio · Longhorn · Vault'],
+    role: 'Infrastructure design and GitOps configuration across cluster services, platform components, and application delivery.',
+    problem: 'A Kubernetes cluster becomes difficult to operate when platform services, applications, secrets, storage, and monitoring are changed independently. The repository needs an explicit delivery order and clear ownership boundaries.',
     decisions: [
-      'Separate guardrail, triage, and diagnostic stages so investigations follow an explicit workflow.',
-      'Query Prometheus, Loki, and the Kubernetes API for live evidence.',
-      'Require approval before diagnostics and again before remediation, with a streaming conversation between a Go backend and React interface.',
-      'Keep browser requests on the same origin with an nginx API proxy, and persist incidents and sessions using PostgreSQL and Redis.',
+      'Use Flux Kustomizations to separate cluster services, infrastructure, configuration, applications, and monitoring into reviewable layers.',
+      'Express reconciliation dependencies so controllers and shared services exist before workloads that depend on them.',
+      'Combine Istio Gateway API, cert-manager, External Secrets, Longhorn, Velero, Prometheus, Loki, and Alloy as platform building blocks.',
+      'Keep environment-specific overlays in Git so changes are reviewable, repeatable, and reversible.',
     ],
-    outcome: 'The repository brings chat, incident records, diagnostic tools, and approval gates into one application. A companion checkout fault lab provides reproducible latency and CPU scenarios.',
-    next: 'Measure diagnostic accuracy against repeatable faults and complete token-usage metering. The AI observability view is documented as a placeholder.',
+    outcome: 'A reviewable GitOps platform layout covering cluster services, delivery, secrets, storage, and observability. The repository makes the intended reconciliation order visible instead of hiding it in manual steps.',
+    next: 'Validate recovery and upgrade paths in a running environment, then document the operational evidence for backups, storage, and progressive delivery.',
   },
   {
     slug: 'aws-eks-foundation',
-    title: 'A Kubernetes foundation, from the network up.',
+    title: 'EKS platform foundation',
+    preview: {
+      title: 'EKS infrastructure',
+      description: 'A Terraform foundation for private Kubernetes nodes, workload identity, and elastic capacity.',
+      contribution: 'Networking, cluster modules, and Karpenter configuration.',
+      steps: [{ label: 'Terraform', icon: 'Terraform' }, { label: 'AWS EKS', icon: 'AWS' }, { label: 'Kubernetes', icon: 'Kubernetes' }],
+    },
     category: 'Infrastructure',
     summary: 'A modular EKS foundation with private worker nodes, workload IAM, and demand-driven capacity through Karpenter.',
     stack: ['AWS', 'Terraform', 'EKS', 'Karpenter'],
     repo: 'luzero-luvis/eks',
-    kind: 'Infrastructure project',
+    kind: 'Personal project · Terraform',
+    layers: ['Karpenter capacity', 'EKS control plane · add-ons', 'VPC · private subnets · 3 AZ'],
     role: 'Infrastructure configuration and documentation, using Terraform modules to connect networking, cluster services, and workload capacity.',
     problem: 'A useful Kubernetes foundation needs more than a control plane. Networking, workload permissions, node capacity, and storage need to fit together and remain understandable.',
     decisions: [
@@ -97,6 +125,6 @@ export const archiveWork = [
 
 export const capabilities = [
   { number: '01', title: 'Infrastructure as code', description: 'Networks, clusters, and cloud resources with explicit boundaries and repeatable configuration.', tools: ['AWS', 'GCP', 'Terraform', 'Ansible'], repo: 'luzero-luvis/cloud-infra' },
-  { number: '02', title: 'Delivery & orchestration', description: 'From a change in Git to a running workload, with a deployment order you can understand.', tools: ['Kubernetes', 'Argo CD', 'FluxCD', 'Docker'], repo: 'luzero-luvis/argo-k8s-gitops' },
-  { number: '03', title: 'Observability & reliability', description: 'Metrics, logs, and diagnostic workflows that help explain what a system is doing.', tools: ['Prometheus', 'Grafana', 'Loki', 'Go'], repo: 'luzero-luvis/k8s-sre-agent' },
+  { number: '02', title: 'Delivery & orchestration', description: 'Git commit to running workload, with an explicit reconciliation order across clusters.', tools: ['Kubernetes', 'Argo CD', 'FluxCD', 'Docker'], repo: 'luzero-luvis/argo-k8s-gitops' },
+  { number: '03', title: 'Observability & reliability', description: 'Metrics, logs, and operational signals for understanding why a system is behaving as it is.', tools: ['Prometheus', 'Grafana', 'Loki', 'Go'], repo: 'luzero-luvis/aws-fluxcd' },
 ]

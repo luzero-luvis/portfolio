@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0b0f14" />
+    <meta name="theme-color" content="#fafbf8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#101516" media="(prefers-color-scheme: dark)" />
     <title>DevOps &amp; Cloud Engineer — Luvis Joston J</title>
     <meta name="description" content="Luvis Joston J — DevOps engineer in Bengaluru building cloud infrastructure, Kubernetes platforms, GitOps workflows, and Go services. Explore projects and engineering notes." />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -18,6 +19,14 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Space+Grotesk:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" />
   </head>
   <body>
+    <script>
+      // Resolve the theme before first paint so the page never flashes the wrong one.
+      try {
+        var stored = localStorage.getItem('portfolio-theme')
+        var system = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        document.documentElement.dataset.theme = stored === 'dark' || stored === 'light' ? stored : system
+      } catch (e) {}
+    </script>
     <div id="root"></div>
     <noscript>This portfolio needs JavaScript. Explore the projects at github.com/luzero-luvis, or contact luvisjoston@gmail.com.</noscript>
     <script type="module" src="/src/main.tsx"></script>

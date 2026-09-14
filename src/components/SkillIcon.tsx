@@ -29,9 +29,13 @@ export default function SkillIcon({ name }: { name: string }) {
   const icon = icons[name]
   if (!icon) return null
 
+  // Brand colours only tint the plate behind a logo. Text labels use theme tokens,
+  // since a fixed brand colour goes unreadable on the dark card.
+  if (!icon.file) return <span className="skill-icon skill-icon-label" aria-hidden="true">{icon.label}</span>
+
   return (
-    <span className="skill-icon" aria-hidden="true" style={{ backgroundColor: icon.color + '12', color: icon.color }}>
-      {icon.file ? <img src={icon.file} width="20" height="20" alt="" loading="lazy" /> : icon.label}
+    <span className="skill-icon" aria-hidden="true" style={{ backgroundColor: icon.color + '12' }}>
+      <img src={icon.file} width="20" height="20" alt="" loading="lazy" />
     </span>
   )
 }
